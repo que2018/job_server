@@ -19,9 +19,11 @@ app.use('/',Express.static(path.join(__dirname,"..",'build')));
 app.use('/',Express.static(path.join(__dirname,"..",'static')));
 
 
-const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
+// const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
+const targetUrl = 'https://job-api-server.herokuapp.com/'
 const proxy = httpProxy.createProxyServer({
-    target:targetUrl
+    target:targetUrl,
+    changeOrigin: true
 });
 
 app.use(compression());
