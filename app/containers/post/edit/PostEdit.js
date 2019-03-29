@@ -7,10 +7,14 @@ import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
 import {actions} from '../../../reducers/post/postEdit';
+import {actions as actionsOfCategory} from '../../../reducers/category/manageCategory'
 import dateFormat from 'dateformat'
 
 const {TextArea} = Input;
-const {update_title, update_author, update_description, update_date_added, update_view_count, update_post} = actions;
+const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post} = actions;
+const {get_categorys, delete_category} = actionsOfCategory;
+const  Option = Select.Option;
+
 
 class PostEdit extends Component {
     constructor(props) {
@@ -38,6 +42,12 @@ class PostEdit extends Component {
         this.props.updateViewCount(e.target.value)
     };
 
+    categoryOnchange(value){
+        this.props.updateCategory(value)
+        console.log(`selected ${value}`);
+    }
+
+
     updatePost() {
        let postData = {};
 	    postData.id = this.props.id;
@@ -46,11 +56,16 @@ class PostEdit extends Component {
 		postData.description = this.props.description;
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
+        postData.category = this.props.category;
+
+        // console.log(postData)
 		
         this.props.updatePost(postData);
     };
 
     render() {
+        console.log(this.props.title)
+        // console.log(this.props.category)
         return (
             <div>
                 <h2>编辑发布</h2>
@@ -90,6 +105,22 @@ class PostEdit extends Component {
                         type='text'
                         value={this.props.viewCount}
                         onChange={this.viewCountOnChange.bind(this)} />
+
+                   <div style = {{marginTop :'10px'}}>
+                     <Select                
+                             placeholder="请选择分类"
+                             value = {this.props.category}
+                             style={{ width: 120 }}
+                             onChange={this.categoryOnchange.bind(this)}>
+                             { this.props.categorys.map( (item) => 
+                                <Option key = {item.Name}>{item.Name}</Option>
+                             )}
+                           
+                         
+                     </Select>
+                     </div>
+
+                        
                     <div className={style.bottomContainer}>
                         <Button type='primary' onClick={this.updatePost.bind(this)} className={style.buttonStyle}>保存</Button>
                     </div>
@@ -98,7 +129,9 @@ class PostEdit extends Component {
         ) 
     }
 
-    componentDidMount() {}
+    componentDidMount() {      
+        this.props.get_categorys(); 
+       }
 }
 
 PostEdit.propsTypes = {
@@ -107,7 +140,8 @@ PostEdit.propsTypes = {
     author: PropTypes.string,
 	description: PropTypes.string,
 	dateAdded: PropTypes.date,
-    viewCount: PropTypes.number
+    viewCount: PropTypes.number,
+    category:PropTypes.string
 };
 
 PostEdit.defaultProps = {
@@ -116,19 +150,22 @@ PostEdit.defaultProps = {
     author: '',
 	description: '',
 	dateAdded: '',
-	viewCount: 0
+    viewCount: 0,
+    category:''
 };
 
 function mapStateToProps(state) {
-    const {id, title, author, description, dateAdded, viewCount} = state.admin.postEdit;
+    const {id, title, author, description, dateAdded, viewCount, category} = state.admin.postEdit;
     
     return {
 		id,
 		title,
         author,
 		description,
-		dateAdded,
-		viewCount
+        dateAdded,
+        category,
+        viewCount,
+        categorys : state.admin.category
     }
 }
 
@@ -138,8 +175,10 @@ function mapDispatchToProps(dispatch) {
         updateAuthor: bindActionCreators(update_author, dispatch),
 		updateDescription: bindActionCreators(update_description, dispatch),
         updateDateAdded: bindActionCreators(update_date_added, dispatch),
-		updateViewCount: bindActionCreators(update_view_count, dispatch),
-        updatePost: bindActionCreators(update_post, dispatch)
+        updateViewCount: bindActionCreators(update_view_count, dispatch),
+        updateCategory: bindActionCreators(update_category, dispatch),
+        updatePost: bindActionCreators(update_post, dispatch),
+        get_categorys: bindActionCreators(get_categorys, dispatch),
     }
 }
 

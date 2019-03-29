@@ -62,7 +62,11 @@ export function* addPostFlow() {
         } 
 		else if (request.data.view_count === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布阅读数量', msgType: 0});
-        } else {
+        }
+        else if (request.data.category === '') {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请选择分类', msgType: 0});
+        } 
+            else {
             let res = yield call(addPost, request.data);
             if (res) {
                 if (res.code === 0) {
@@ -138,14 +142,16 @@ export function* getPostFlow() {
 			let author = res.data.author;
 			let description = res.data.description;
 			let dateAdded = res.data.dateAdded;
-			let viewCount = res.data.viewCount;
+            let viewCount = res.data.viewCount;
+            let category = res.data.category;
 
 			yield put({type:PostEditypes.SET_POST_ID, id});
 			yield put({type:PostEditypes.EDITING_TITLE, title});
 			yield put({type:PostEditypes.EDITING_AUTHOR, author});
 			yield put({type:PostEditypes.EDITING_DESCRIPTION, description});
 			yield put({type:PostEditypes.EDITING_DATE_ADDED, dateAdded});
-			yield put({type:PostEditypes.EDITING_VIEW_COUNT, viewCount}); 
+            yield put({type:PostEditypes.EDITING_VIEW_COUNT, viewCount}); 
+            yield put({type:PostEditypes.EDITING_CATEGORY, category}); 
         }
     }
 }

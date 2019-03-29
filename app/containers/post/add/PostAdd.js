@@ -6,11 +6,18 @@ import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
 import {actions} from '../../../reducers/post/postAdd';
+import {actions as actionsOfCategory} from '../../../reducers/category/manageCategory'
 import dateFormat from 'dateformat'
 import style from './style.css'
 
 const {TextArea} = Input;
-const {update_title, update_author, update_description, update_date_added, update_view_count, add_post} = actions;
+const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, add_post} = actions;
+const {get_categorys, delete_category} = actionsOfCategory;
+const  Option = Select.Option;
+
+
+
+
 
 class PostAdd extends Component {
     constructor(props) {
@@ -38,6 +45,11 @@ class PostAdd extends Component {
         this.props.updateViewCount(e.target.value)
     };
 
+    categoryOnchange(value){
+        this.props.updateCategory(value)
+        console.log(`selected ${value}`);
+    }
+
     addPost() {
         let postData = {};
         postData.title = this.props.title;
@@ -45,6 +57,9 @@ class PostAdd extends Component {
 		postData.description = this.props.description;
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
+
+        postData.category = this.props.category;
+        // console.log(postData)
 		
         this.props.addPost(postData);
     };
@@ -89,6 +104,19 @@ class PostAdd extends Component {
                         type='text'
                         value={this.props.viewCount}
                         onChange={this.viewCountOnChange.bind(this)} />
+			       <span className={style.subTitle}>分类</span>
+                   <div style = {{marginTop :'10'}}>
+                     <Select 
+                             placeholder="请选择分类"
+                             style={{ width: 120 }}
+                             onChange={this.categoryOnchange.bind(this)}>
+                             { this.props.categorys.map( (item) => 
+                                <Option key = {item.Name}>{item.Name}</Option>
+                             )}
+                           
+                         
+                     </Select>
+                     </div>
                     <div className={style.bottomContainer}>
                         <Button type='primary' onClick={this.addPost.bind(this)}className={style.buttonStyle}>添加</Button>
                     </div>
@@ -97,7 +125,9 @@ class PostAdd extends Component {
         ) 
     }
 
-    componentDidMount() {}
+    componentDidMount() {      
+         this.props.get_categorys(); 
+        }
 }
 
 PostAdd.propsTypes = {
@@ -105,26 +135,30 @@ PostAdd.propsTypes = {
     author: PropTypes.string,
 	description: PropTypes.date,
 	dateAdded: PropTypes.string,
-    viewCount: PropTypes.number
+    viewCount: PropTypes.number,
+    category: PropTypes.string,
 };
 
 PostAdd.defaultProps = {
     title: '',
     author: '',
 	description: '',
-	dateAdded: '',
+    dateAdded: '',
+    category:'', 
 	viewCount: 0
 };
 
 function mapStateToProps(state) {
-    const {title, author, description, dateAdded, viewCount} = state.admin.postAdd;
+    const {title, author, description, dateAdded, viewCount,category} = state.admin.postAdd;
     
     return {
         title,
         author,
 		description,
-		dateAdded,
-		viewCount
+        dateAdded,
+        category,
+        viewCount,
+        categorys : state.admin.category
     }
 }
 
@@ -135,7 +169,9 @@ function mapDispatchToProps(dispatch) {
 		updateDescription: bindActionCreators(update_description, dispatch),
         updateDateAdded: bindActionCreators(update_date_added, dispatch),
         updateViewCount: bindActionCreators(update_view_count, dispatch),
-        addPost: bindActionCreators(add_post, dispatch)
+        updateCategory: bindActionCreators(update_category, dispatch),
+        addPost: bindActionCreators(add_post, dispatch),
+        get_categorys: bindActionCreators(get_categorys, dispatch),
     }
 }
 

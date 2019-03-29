@@ -8,7 +8,7 @@ import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
 import {Button} from 'antd'
 
-import {PostCell} from './component/postCell';
+import {CategoryCell} from './component/CategoryCell';
 import style from './style.css'
 
 const {get_categorys, delete_category} = actions;
@@ -23,7 +23,6 @@ class Category extends Component {
         }
     }
     
-
     render() {
 		const columns = [{
 			title:'名称',
@@ -31,17 +30,15 @@ class Category extends Component {
 			key:'Name',
 			width: 500
 		}, 
-
 		{
 			title: '操作',
 			key: 'action',
 			width: 100,
 			render: (text, record) => (	
-				<PostCell
-					// getPost={(id)=>this.props.getPost(record._id)}		
+				<CategoryCell
 					delete = {(id) => {
 						this.props.delete_category(record._id); 
-						}}					
+					}}					
 					history= {this.props.history}
 					data={record} />
 			)
@@ -59,12 +56,9 @@ class Category extends Component {
     }
 
     componentDidMount() {
-        // if(this.props.postList.length === 0)
-            this.props.get_categorys();
-            // console.log(this.props)
+        this.props.get_categorys();
     }
 }
-
 
 function mapStateToProps(state) {
     return{
@@ -75,7 +69,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         get_categorys: bindActionCreators(get_categorys, dispatch),
-		// getPost: bindActionCreators(get_post, dispatch),
 		delete_category: bindActionCreators(delete_category, dispatch),
     }
 }

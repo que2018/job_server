@@ -3,7 +3,8 @@ const initialState={
     title:'',
     author:'',
 	description:'',
-	dateAdded:'',
+    dateAdded:'',
+    category:'',
     viewCount: 0
 };
 
@@ -13,6 +14,8 @@ export const actionTypes = {
 	NEWING_DESCRIPTION:'NEWING_DESCRIPTION',
     NEWING_DATE_ADDED:'NEWING_DATE_ADDED',
     NEWING_VIEW_COUNT:'NEWING_VIEW_COUNT',
+    NEWING_CATEGORY:' NEWING_CATEGORY',
+
 	ADD_POST:'ADD_POST'
 };
 
@@ -47,6 +50,13 @@ export const actions = {
             viewCount
         }
     },
+
+    update_category:function (category) {
+        return{
+            type:actionTypes.NEWING_CATEGORY,
+            category
+        }
+    },
 	add_post:function (data) {
         return{
             type:actionTypes.ADD_POST,
@@ -76,6 +86,11 @@ export function reducer(state = initialState, action) {
 		case actionTypes.NEWING_VIEW_COUNT:
             return{
                 ...state,viewCount:action.viewCount
+            };	
+
+        case actionTypes.NEWING_CATEGORY:
+            return{
+                ...state,category:action.category
             };	
 		
         default:

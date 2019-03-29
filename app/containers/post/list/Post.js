@@ -45,6 +45,14 @@ class Post extends Component {
 			key:'viewCount',
 			width: 100
 		},  
+
+		{
+			title:'分类',
+			dataIndex:'category',
+			key:'category',
+			width: 100
+		},  
+
 		{
 			title: '操作',
 			key: 'action',

@@ -6,8 +6,8 @@ module.exports = {
     dbHost:"localhost",
     dbPort:"27017",
     app:{
-        title:"personal blog",
-        description:'Nealyang\'s personal blog demo',
+        title:"找工必胜客",
+        description:'找工必胜客后台',
         head:{
             titleTemplate:'blog',
             meta:[

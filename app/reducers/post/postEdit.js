@@ -4,7 +4,8 @@ const initialState={
 	title:'',
     author:'',
 	description:'',
-	dateAdded:'',
+    dateAdded:'',
+    category:'',
     viewCount: 0
 };
 
@@ -14,7 +15,8 @@ export const actionTypes = {
     EDITING_AUTHOR:'EDITING_AUTHOR',
 	EDITING_DESCRIPTION:'EDITING_DESCRIPTION',
     EDITING_DATE_ADDED:'EDITING_DATE_ADDED',
-    EDITING_VIEW_COUNT:'EDITING_VIEW_COUNT',
+    EDITING_VIEW_COUNT:'EDITING_VIEW_COUNT',    
+    EDITING_CATEGORY:' NEWING_CATEGORY',
 	UPDATE_POST:'UPDATE_POST'
 };
 
@@ -47,6 +49,13 @@ export const actions = {
         return{
             type:actionTypes.EDITING_VIEW_COUNT,
             viewCount
+        }
+    },
+
+    update_category:function (category) {
+        return{
+            type:actionTypes.EDITING_CATEGORY,
+            category
         }
     },
 	update_post:function (data) {
@@ -82,6 +91,11 @@ export function reducer(state = initialState, action) {
 		case actionTypes.EDITING_VIEW_COUNT:
             return{
                 ...state,viewCount:action.viewCount
+            };	
+
+        case actionTypes.EDITING_CATEGORY:
+            return{
+                ...state,category:action.category
             };	
 		
         default:
