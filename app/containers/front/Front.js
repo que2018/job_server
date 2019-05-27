@@ -26,14 +26,14 @@ class Front extends Component{
         const {login, register} = this.props;
         return(
             <div>
-                <div>
+                {/* <div>
                     <Banner/>
-                </div>
+                </div> */}
                 <div className={style.container}>
                     <div className={style.contentContainer}>
                         <div className={style.content}>
                             <Switch>
-                                <Route exact path={url} component={Home}/>
+                                <Route exact path={url} />
                                 <Route path={`/detail/:id`} component={Detail}/>
                                 <Route component={NotFound}/>
                             </Switch>

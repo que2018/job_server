@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customer/customerAdd';
+import {actions} from '../../../reducers/customer/add/customer_add';
 import dateFormat from 'dateformat'
 import style from './style.css'
 

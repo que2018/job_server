@@ -27,7 +27,12 @@ class AppIndex extends Component {
     constructor(props) {
         super(props);
         this.openNotification = this.openNotification.bind(this);
-        this.shouldComponentUpdate = PureRenderMixiin.shouldComponentUpdate.bind(this);
+        // this.shouldComponentUpdate = PureRenderMixiin.shouldComponentUpdate.bind(this);
+    }
+
+
+    componentDidMount() {
+        this.props.user_auth();
     }
 
     openNotification(type, message) {
@@ -43,7 +48,12 @@ class AppIndex extends Component {
 
     render() {
         let {isFetching} = this.props;
+        // console.log(this.props.userInfo)
+
+        
         return (
+            // !this.props.userInfo ? <Loading/>:
+            //  this.props.userInfo.userType === 'admin' ?
             <Router>
                 <div>
                     <Switch>
@@ -58,13 +68,10 @@ class AppIndex extends Component {
                             this.openNotification('error', this.props.notification.content)) :
                         null}
                 </div>
-            </Router>
+            </Router> 
         )
     }
 
-    componentDidMount() {
-        this.props.user_auth();
-    }
 
 }
 

@@ -9,7 +9,7 @@ export function* getPostList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
 	
     try {
-        return yield call(get, `/admin/post/get_posts?pageNum=${pageNum}`);
+        return yield call(post, `/admin/post/get_posts?pageNum=${pageNum}`);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -144,6 +144,7 @@ export function* getPostFlow() {
 			let dateAdded = res.data.dateAdded;
             let viewCount = res.data.viewCount;
             let category = res.data.category;
+            let _category_id = res.data._category_id;
 
 			yield put({type:PostEditypes.SET_POST_ID, id});
 			yield put({type:PostEditypes.EDITING_TITLE, title});
@@ -152,6 +153,7 @@ export function* getPostFlow() {
 			yield put({type:PostEditypes.EDITING_DATE_ADDED, dateAdded});
             yield put({type:PostEditypes.EDITING_VIEW_COUNT, viewCount}); 
             yield put({type:PostEditypes.EDITING_CATEGORY, category}); 
+            yield put({type:PostEditypes.EDITING_CATEGORY_ID, _category_id}); 
         }
     }
 }

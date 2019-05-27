@@ -1,48 +1,15 @@
+import {combineReducers} from 'redux'
 
-const initialState = {
-    customerList: [],
-    pageNum: 1,
-    total:0
-};
+import customer_add from './add/customer_add'
+import customer_edit from './edit/customer_edit'
+import customer_list from './list/customer_list'
 
-export const actionTypes = {
-    'GET_CUSTOMERS':'GET_CUSTOMERS',
-	'RESPONSE_GET_CUSTOMERS':'RESPONSE_GET_CUSTOMERS',
-	'GET_CUSTOMER':'GET_CUSTOMER',
-	'DELETE_CUSTOMER':'DELETE_CUSTOMER'
-};
+const customer = combineReducers({
+    customer_add,
+	customer_edit,
+    customer_list
+});
 
-export const actions = {
-    get_customers: function (pageNum=1) {
-        return {
-            type: actionTypes.GET_CUSTOMERS,
-            pageNum:pageNum
-        }
-    },
-	get_customer: function (id) {
-        return {
-            type: actionTypes.GET_CUSTOMER,
-            id
-        }
-    },
-	delete_customer: function (id) {
-        return {
-            type: actionTypes.DELETE_CUSTOMER,
-            id
-        }
-    }
-};
+export default customer
 
-export function customers(state = initialState, action) {
-    switch (action.type) {
-        case actionTypes.RESPONSE_GET_CUSTOMERS:
-            return {
-                ...state, 
-				customerList: [...action.data.list], 
-				total: action.data.total,
-				pageNum: action.data.pageNum
-            };
-        default:
-            return state;
-    }
-}
+

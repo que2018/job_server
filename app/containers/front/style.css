@@ -6,7 +6,9 @@
 }
 .loginContainer{
     flex:1;
-    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 .container{
     display: flex;
@@ -14,6 +16,6 @@
     justify-content: center;
     background: #eee;
 }
-.content{
-    width: 570px;
-}
+/* .content{
+    width: 0px;
+} */

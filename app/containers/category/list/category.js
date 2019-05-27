@@ -8,10 +8,10 @@ import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
 import {Button} from 'antd'
 
-import {CategoryCell} from './component/CategoryCell';
+import {PostCell} from './component/postCell';
 import style from './style.css'
 
-const {get_categorys, delete_category} = actions;
+const {get_categorys, delete_category, get_category} = actions;
 
 class Category extends Component {
 
@@ -23,22 +23,42 @@ class Category extends Component {
         }
     }
     
+
     render() {
 		const columns = [{
 			title:'名称',
 			dataIndex:'Name',
 			key:'Name',
-			width: 500
+			width: 1000
 		}, 
+
+		{
+			title:'图标',
+			dataIndex:'ImageUrl',
+			key:'ImageUrl',
+			width: 1000,
+			alien: 'center',
+			render: (record) => (	
+				// console.log(record)
+				<img src = {'https://s3-us-west-1.amazonaws.com/job-upload-imge/' + record} height="45" width="45" />
+			)
+
+		}, 
+
 		{
 			title: '操作',
 			key: 'action',
-			width: 100,
+			width: 500,
 			render: (text, record) => (	
-				<CategoryCell
-					delete = {(id) => {
-						this.props.delete_category(record._id); 
-					}}					
+				<PostCell
+					// getPost={(id)=>this.props.getPost(record._id)}		
+					delete = {() => {
+						console.log(record)
+						this.props.delete_category(record._id , record.ImageUrl); 
+						}}	
+					getCategory = {() => {
+						this.props.get_category(record._id)
+					}}			
 					history= {this.props.history}
 					data={record} />
 			)
@@ -50,15 +70,19 @@ class Category extends Component {
 			    <Col span={12}><h2>分类管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/category_add')}}/></Col>
 			  </Row>
-			  <Table columns={columns} dataSource={this.props.category} />
+			  <Table pagination = {true} columns={columns} dataSource={this.props.category} />
             </div>
         )
     }
 
     componentDidMount() {
-        this.props.get_categorys();
+        if(this.props.category.length === 0)
+            this.props.get_categorys();
+        // console.log(this.props)
     }
 }
+
+
 
 function mapStateToProps(state) {
     return{
@@ -69,6 +93,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         get_categorys: bindActionCreators(get_categorys, dispatch),
+		get_category: bindActionCreators(get_category, dispatch),
 		delete_category: bindActionCreators(delete_category, dispatch),
     }
 }

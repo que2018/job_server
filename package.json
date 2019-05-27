@@ -1,5 +1,5 @@
 {
-  "name": "react_express_blog",
+  "name": "react_job_hunter",
   "version": "1.0.0",
   "description": "react-express-mongo demo",
   "main": "index.js",
@@ -10,13 +10,15 @@
     "start-dev-api": "nodemon --watch server/api server/api/index.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "start": "npm run watch-client",
-    "start-prod": "npm run build & npm run watch-client-prod & npm run start-dev-api"
+    "start-prod": "npm run build & npm run watch-client-prod & npm run start-dev-api",
+    "start-local-api": "cross-env API_ENV=local node ./server/index.js",
+    "start-heroku-api": "cross-env API_ENV=heroku node ./server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Nealyang/React-Express-Blog-Demo.git"
   },
-  "author": "saminthebox",
+  "author": "Kimi&Sam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Nealyang/React-Express-Blog-Demo/issues"
@@ -51,6 +53,7 @@
     "redux-saga": "^0.15.6",
     "remark": "^8.0.0",
     "remark-react": "^4.0.1",
+    "reqwest": "^2.0.5",
     "serialize-javascript": "^1.4.0",
     "serve-favicon": "^2.4.4"
   },

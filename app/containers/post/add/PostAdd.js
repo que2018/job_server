@@ -25,6 +25,10 @@ class PostAdd extends Component {
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
+    state = {
+        category_id :''
+    };
+
     titleOnChange(e) {
         this.props.updateTitle(e.target.value)
     };
@@ -46,8 +50,10 @@ class PostAdd extends Component {
     };
 
     categoryOnchange(value){
-        this.props.updateCategory(value)
-        console.log(`selected ${value}`);
+        this.props.updateCategory(value.label)
+        this.setState ({category_id:value.key})
+        // console.log(`selected ${value}`);
+        // console.log(value)
     }
 
     addPost() {
@@ -57,14 +63,16 @@ class PostAdd extends Component {
 		postData.description = this.props.description;
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
-
         postData.category = this.props.category;
+        postData._category_id = this.state.category_id
+     
         // console.log(postData)
 		
         this.props.addPost(postData);
     };
 
     render() {
+             console.log(this.props.categorys)
         return (
             <div>
                 <h2>增加发布</h2>
@@ -108,10 +116,12 @@ class PostAdd extends Component {
                    <div style = {{marginTop :'10'}}>
                      <Select 
                              placeholder="请选择分类"
+                             labelInValue 
                              style={{ width: 120 }}
                              onChange={this.categoryOnchange.bind(this)}>
                              { this.props.categorys.map( (item) => 
-                                <Option key = {item.Name}>{item.Name}</Option>
+                                 <Option key = {item._id}>{item.Name}</Option>      
+                                  
                              )}
                            
                          
@@ -127,6 +137,7 @@ class PostAdd extends Component {
 
     componentDidMount() {      
          this.props.get_categorys(); 
+    
         }
 }
 

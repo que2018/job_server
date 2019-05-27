@@ -11,7 +11,7 @@ import {actions as actionsOfCategory} from '../../../reducers/category/manageCat
 import dateFormat from 'dateformat'
 
 const {TextArea} = Input;
-const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post} = actions;
+const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post , update_category_id} = actions;
 const {get_categorys, delete_category} = actionsOfCategory;
 const  Option = Select.Option;
 
@@ -43,8 +43,9 @@ class PostEdit extends Component {
     };
 
     categoryOnchange(value){
-        this.props.updateCategory(value)
-        console.log(`selected ${value}`);
+       console.log(value)
+       this.props.updateCategory(value.label)
+       this.props.update_category_id(value.key)
     }
 
 
@@ -57,14 +58,15 @@ class PostEdit extends Component {
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
         postData.category = this.props.category;
-
-        // console.log(postData)
-		
+        postData._category_id = this.props._category_id
         this.props.updatePost(postData);
+        // console.log(postData)
     };
 
     render() {
-        console.log(this.props.title)
+        // console.log(this.props.title)
+        // console.log(target.length == 0 ? undefined : target[0]._id)
+        // console.log(this.props._category_id)
         // console.log(this.props.category)
         return (
             <div>
@@ -109,14 +111,15 @@ class PostEdit extends Component {
                    <div style = {{marginTop :'10px'}}>
                      <Select                
                              placeholder="请选择分类"
-                             value = {this.props.category}
+                            //  defaultValue =
+                          
+                             labelInValue 
+                             value = {{ key:this.props.category}}
                              style={{ width: 120 }}
                              onChange={this.categoryOnchange.bind(this)}>
                              { this.props.categorys.map( (item) => 
-                                <Option key = {item.Name}>{item.Name}</Option>
-                             )}
-                           
-                         
+                                <Option key = {item._id}>{item.Name}</Option>
+                             )}                       
                      </Select>
                      </div>
 
@@ -141,7 +144,8 @@ PostEdit.propsTypes = {
 	description: PropTypes.string,
 	dateAdded: PropTypes.date,
     viewCount: PropTypes.number,
-    category:PropTypes.string
+    category:PropTypes.string,
+    _category_id:PropTypes.string,
 };
 
 PostEdit.defaultProps = {
@@ -151,11 +155,12 @@ PostEdit.defaultProps = {
 	description: '',
 	dateAdded: '',
     viewCount: 0,
-    category:''
+    category:'',
+    _category_id:''
 };
 
 function mapStateToProps(state) {
-    const {id, title, author, description, dateAdded, viewCount, category} = state.admin.postEdit;
+    const {id, title, author, description, dateAdded, viewCount, category, _category_id} = state.admin.postEdit;
     
     return {
 		id,
@@ -165,6 +170,7 @@ function mapStateToProps(state) {
         dateAdded,
         category,
         viewCount,
+        _category_id,
         categorys : state.admin.category
     }
 }
@@ -178,6 +184,7 @@ function mapDispatchToProps(dispatch) {
         updateViewCount: bindActionCreators(update_view_count, dispatch),
         updateCategory: bindActionCreators(update_category, dispatch),
         updatePost: bindActionCreators(update_post, dispatch),
+        update_category_id : bindActionCreators(update_category_id, dispatch),
         get_categorys: bindActionCreators(get_categorys, dispatch),
     }
 }

@@ -6,7 +6,7 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customer/customerEdit';
+import {actions} from '../../../reducers/customer/edit/customer_edit';
 import dateFormat from 'dateformat'
 
 const {edit_name, edit_description, update_customer} = actions;

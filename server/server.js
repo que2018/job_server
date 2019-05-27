@@ -20,16 +20,18 @@ app.use('/',Express.static(path.join(__dirname,"..",'static')));
 
 
 // const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
-const targetUrl = 'https://job-api-server.herokuapp.com/'
+
+
+// const targetUrl = `http://localhost:3030/`;
+// const targetUrl = 'https://job-api-server.herokuapp.com/'
+const targetUrl = config.apiUrl
 const proxy = httpProxy.createProxyServer({
-    target:targetUrl,
+    target:config.apiUrl,
     changeOrigin: true
 });
-
+console.log(targetUrl)
 app.use(compression());
 app.use(favicon(path.join(__dirname,'..','static','favicon.ico')));
-
-
 
 //热更新
 if(process.env.NODE_ENV!=='production'){

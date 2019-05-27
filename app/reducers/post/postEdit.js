@@ -6,7 +6,8 @@ const initialState={
 	description:'',
     dateAdded:'',
     category:'',
-    viewCount: 0
+    viewCount: 0,
+    _category_id:'',
 };
 
 export const actionTypes = {
@@ -17,6 +18,7 @@ export const actionTypes = {
     EDITING_DATE_ADDED:'EDITING_DATE_ADDED',
     EDITING_VIEW_COUNT:'EDITING_VIEW_COUNT',    
     EDITING_CATEGORY:' NEWING_CATEGORY',
+    EDITING_CATEGORY_ID:' NEWING_CATEGORY_ID',
 	UPDATE_POST:'UPDATE_POST'
 };
 
@@ -58,6 +60,12 @@ export const actions = {
             category
         }
     },
+    update_category_id:function (_category_id) {
+        return{
+            type:actionTypes.EDITING_CATEGORY_ID,
+            _category_id
+        }
+    },
 	update_post:function (data) {
         return{
             type:actionTypes.UPDATE_POST,
@@ -96,6 +104,10 @@ export function reducer(state = initialState, action) {
         case actionTypes.EDITING_CATEGORY:
             return{
                 ...state,category:action.category
+            };	
+        case actionTypes.EDITING_CATEGORY_ID:
+            return{
+                ...state,_category_id:action._category_id
             };	
 		
         default:

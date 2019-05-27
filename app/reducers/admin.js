@@ -5,10 +5,9 @@ import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {posts} from './post/post';
 import {reducer as postAdd} from "./post/postAdd";
 import {reducer as postEdit} from "./post/postEdit";
-import {customers} from './customer/customer';
-import {reducer as customerAdd} from "./customer/customerAdd";
-import {reducer as customerEdit} from "./customer/customerEdit";
+import {customer} from './customer/customer';
 import {reducer as category} from "./category/manageCategory"
+import {reducer as categoryEdit} from "./category/categroyEdit"
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -46,10 +45,9 @@ const admin = combineReducers({
 	posts,
 	postAdd,
 	postEdit,
-	customers,
-	customerAdd,
-	customerEdit,
-	category
+	customer,
+    category,
+    categoryEdit
 });
 
 export default admin
