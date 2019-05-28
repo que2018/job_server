@@ -5,7 +5,8 @@ import {Home} from '../home'
 import style from './style.css'
 import {
     Switch,
-    Route
+    Route,
+	Redirect
 } from 'react-router-dom'
 import Banner from "../components/banner/Banner";
 import Menus from "../components/menu/Menus";
@@ -40,7 +41,7 @@ class Front extends Component{
                         </div>
                         <div className={`${style.loginContainer}`}>
                             {this.props.userInfo.userId ?
-                                <Logined history={this.props.history} userInfo={this.props.userInfo}/> :
+                                <Redirect to='/'/> :
                                 <Login login={login} register={register}/>}
                         </div>
                     </div>

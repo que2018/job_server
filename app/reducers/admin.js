@@ -5,7 +5,9 @@ import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {posts} from './post/post';
 import {reducer as postAdd} from "./post/postAdd";
 import {reducer as postEdit} from "./post/postEdit";
-import {customer} from './customer/customer';
+import {customer_add} from './customer/customer_add';
+import {customer_edit} from './customer/customer_edit';
+import {customer_list} from './customer/customer_list';
 import {reducer as category} from "./category/manageCategory"
 import {reducer as categoryEdit} from "./category/categroyEdit"
 
@@ -45,7 +47,9 @@ const admin = combineReducers({
 	posts,
 	postAdd,
 	postEdit,
-	customer,
+	customer_add,
+	customer_edit,
+	customer_list,
     category,
     categoryEdit
 });

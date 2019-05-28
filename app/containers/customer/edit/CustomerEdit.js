@@ -6,7 +6,7 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customer/edit/customer_edit';
+import {actions} from '../../../reducers/customer/customer_edit';
 import dateFormat from 'dateformat'
 
 const {edit_name, edit_description, update_customer} = actions;
@@ -76,7 +76,7 @@ CustomerEdit.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    const {id, name, description} = state.admin.customerEdit;
+    const {id, name, description} = state.admin.customer_edit;
     
     return {
 		id,

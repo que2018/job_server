@@ -57,7 +57,7 @@ class Admin extends Component {
                                 <div className={style.contentContainer}>
                                     <Switch>
                                         <Route exact path={url} component={AdminIndex}/>
-										<Route path={`${url}/post`} component={Post}/>
+										<Route path='/admin/post' component={Post}/>
 										<Route path={`${url}/post_add`} component={PostAdd}/>
 										<Route path={`${url}/post_edit`} component={PostEdit}/>
 										
@@ -78,7 +78,7 @@ class Admin extends Component {
                                 </div>           
                                            
                             </div> 
-                                       :  this.props.isFetching? <Loading/>:<Redirect to='/'/>
+                                       :  this.props.isFetching? <Loading/>:<Redirect to='/login'/>
                             // undefined
                             // : <AdminLogin/>
                             // <Redirect to='/'/>

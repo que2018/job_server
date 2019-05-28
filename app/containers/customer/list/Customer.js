@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/customer/list/customer_list'
+import {actions} from '../../../reducers/customer/customer_list'
 import {Table, Pagination} from 'antd';
 import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
@@ -75,7 +75,7 @@ Customer.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    let {pageNum, customerList, total} = state.admin.customers;
+    let {pageNum, customerList, total} = state.admin.customer.customer_list;
 	
     return {
         pageNum,

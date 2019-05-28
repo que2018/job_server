@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customer/add/customer_add';
+import {actions} from '../../../reducers/customer/customer_add';
 import dateFormat from 'dateformat'
 import style from './style.css'
 
@@ -74,7 +74,7 @@ CustomerAdd.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    const {name, description} = state.admin.customerAdd;
+    const {name, description} = state.admin.customer_add;
     
     return {
         name,

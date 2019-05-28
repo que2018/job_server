@@ -57,9 +57,9 @@ class AppIndex extends Component {
             <Router>
                 <div>
                     <Switch>
-                        <Route path='/404' component={NotFound}/>
-                        <Route path='/admin' component={Admin}/>
-                        <Route component={Front}/>
+						<Route path='/login' component={Front}/>
+                        <Route path='/' component={Admin}/>
+                        <Route component={NotFound}/>
                     </Switch>
                     {isFetching && <Loading/>}
                     {this.props.notification && this.props.notification.content ?
