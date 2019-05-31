@@ -12,7 +12,7 @@ import style from './style.css'
 
 const {TextArea} = Input;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, add_post} = actions;
-const {get_categorys, delete_category} = actionsOfCategory;
+const {get_categories, delete_category} = actionsOfCategory;
 const  Option = Select.Option;
 
 
@@ -72,7 +72,7 @@ class PostAdd extends Component {
     };
 
     render() {
-             console.log(this.props.categorys)
+             console.log(this.props.categories)
         return (
             <div>
                 <h2>增加发布</h2>
@@ -119,7 +119,7 @@ class PostAdd extends Component {
                              labelInValue 
                              style={{ width: 120 }}
                              onChange={this.categoryOnchange.bind(this)}>
-                             { this.props.categorys.map( (item) => 
+                             { this.props.categories.map( (item) => 
                                  <Option key = {item._id}>{item.Name}</Option>      
                                   
                              )}
@@ -136,7 +136,7 @@ class PostAdd extends Component {
     }
 
     componentDidMount() {      
-         this.props.get_categorys(); 
+         this.props.get_categories(); 
     
         }
 }
@@ -169,7 +169,7 @@ function mapStateToProps(state) {
         dateAdded,
         category,
         viewCount,
-        categorys : state.admin.category
+        categories : state.admin.category
     }
 }
 
@@ -182,7 +182,7 @@ function mapDispatchToProps(dispatch) {
         updateViewCount: bindActionCreators(update_view_count, dispatch),
         updateCategory: bindActionCreators(update_category, dispatch),
         addPost: bindActionCreators(add_post, dispatch),
-        get_categorys: bindActionCreators(get_categorys, dispatch),
+        get_categories: bindActionCreators(get_categories, dispatch),
     }
 }
 

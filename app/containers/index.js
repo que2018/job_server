@@ -17,8 +17,8 @@ import {notification} from 'antd';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {actions} from '../reducers'
-import Admin from "./admin/Admin";
-import Front from './front/Front'
+import Dashboard from "./dashboard/dashboard";
+import Auth from './auth/auth'
 import animationStyle from '../lib/animate.css'
 const {clear_msg, user_auth} = actions;
 
@@ -27,9 +27,7 @@ class AppIndex extends Component {
     constructor(props) {
         super(props);
         this.openNotification = this.openNotification.bind(this);
-        // this.shouldComponentUpdate = PureRenderMixiin.shouldComponentUpdate.bind(this);
     }
-
 
     componentDidMount() {
         this.props.user_auth();
@@ -37,6 +35,7 @@ class AppIndex extends Component {
 
     openNotification(type, message) {
         let that = this;
+		
         notification[type]({
             message: message,
             onClose: () => {
@@ -48,17 +47,13 @@ class AppIndex extends Component {
 
     render() {
         let {isFetching} = this.props;
-        // console.log(this.props.userInfo)
 
-        
         return (
-            // !this.props.userInfo ? <Loading/>:
-            //  this.props.userInfo.userType === 'admin' ?
             <Router>
                 <div>
                     <Switch>
-						<Route path='/login' component={Front}/>
-                        <Route path='/' component={Admin}/>
+						<Route path='/login' component={Auth} />
+                        <Route path='/' component={Dashboard} />
                         <Route component={NotFound}/>
                     </Switch>
                     {isFetching && <Loading/>}

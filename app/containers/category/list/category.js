@@ -11,7 +11,7 @@ import {Button} from 'antd'
 import {PostCell} from './component/postCell';
 import style from './style.css'
 
-const {get_categorys, delete_category, get_category} = actions;
+const {get_categories, delete_category, get_category} = actions;
 
 class Category extends Component {
 
@@ -19,7 +19,7 @@ class Category extends Component {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.state={
-            categorys: ['其他',],
+            categories: ['其他',],
         }
     }
     
@@ -77,7 +77,7 @@ class Category extends Component {
 
     componentDidMount() {
         if(this.props.category.length === 0)
-            this.props.get_categorys();
+            this.props.get_categories();
         // console.log(this.props)
     }
 }
@@ -92,7 +92,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        get_categorys: bindActionCreators(get_categorys, dispatch),
+        get_categories: bindActionCreators(get_categories, dispatch),
 		get_category: bindActionCreators(get_category, dispatch),
 		delete_category: bindActionCreators(delete_category, dispatch),
     }

@@ -13,7 +13,7 @@ export const actionTypes = {
 };
 
 export const actions = {
-    get_categorys: function (pageNum = 1) {
+    get_categories: function (pageNum = 1) {
         return {
             type: actionTypes.GET_CATEGORYS,
             pageNum

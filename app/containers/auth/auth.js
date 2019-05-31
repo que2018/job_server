@@ -17,7 +17,7 @@ import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
 import {actions as IndexActions} from '../../reducers/index'
 
-class Front extends Component{
+class Auth extends Component{
     constructor(props){
         super(props);
     }
@@ -54,11 +54,11 @@ class Front extends Component{
     }
 }
 
-Front.defaultProps = {
+Auth.defaultProps = {
     categories:[]
 };
 
-Front.propTypes = {
+Auth.propTypes = {
     categories:PropTypes.array.isRequired
 };
 
@@ -77,4 +77,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Front)
+)(Auth)

@@ -12,7 +12,7 @@ import dateFormat from 'dateformat'
 
 const {TextArea} = Input;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post , update_category_id} = actions;
-const {get_categorys, delete_category} = actionsOfCategory;
+const {get_categories, delete_category} = actionsOfCategory;
 const  Option = Select.Option;
 
 
@@ -117,7 +117,7 @@ class PostEdit extends Component {
                              value = {{ key:this.props.category}}
                              style={{ width: 120 }}
                              onChange={this.categoryOnchange.bind(this)}>
-                             { this.props.categorys.map( (item) => 
+                             { this.props.categories.map( (item) => 
                                 <Option key = {item._id}>{item.Name}</Option>
                              )}                       
                      </Select>
@@ -133,7 +133,7 @@ class PostEdit extends Component {
     }
 
     componentDidMount() {      
-        this.props.get_categorys(); 
+        this.props.get_categories(); 
        }
 }
 
@@ -171,7 +171,7 @@ function mapStateToProps(state) {
         category,
         viewCount,
         _category_id,
-        categorys : state.admin.category
+        categories : state.admin.category
     }
 }
 
@@ -185,7 +185,7 @@ function mapDispatchToProps(dispatch) {
         updateCategory: bindActionCreators(update_category, dispatch),
         updatePost: bindActionCreators(update_post, dispatch),
         update_category_id : bindActionCreators(update_category_id, dispatch),
-        get_categorys: bindActionCreators(get_categorys, dispatch),
+        get_categories: bindActionCreators(get_categories, dispatch),
     }
 }
 
