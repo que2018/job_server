@@ -10,8 +10,8 @@ import dateFormat from 'dateformat'
 import style from './style.css'
 import reqwest from 'reqwest'
 
-
 const {add_category , upload_category_image} = actions;  
+
 class CategoryAdd extends Component {
     constructor(props) {
         super(props);

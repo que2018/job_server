@@ -1,25 +1,17 @@
 import React, {Component, PropTypes} from 'react'
 import PureRenderMixiin from 'react-addons-pure-render-mixin'
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect
-} from 'react-router-dom'
-import './reset.css'
-import {Detail} from './detail'
-import {Home} from './home'
-import Banner from "./components/banner/Banner";
-import Menus from "./components/menu/Menus";
-import NotFound from "../components/notFound/NotFound";
-import {Loading} from "./components/loading/Loading"
-import {notification} from 'antd';
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {actions} from '../reducers'
-import Dashboard from "./dashboard/dashboard";
+import {notification} from 'antd';
+
+import NotFound from '../components/notFound/NotFound';
+import {Loading} from './components/loading/Loading'
+import Dashboard from './dashboard/dashboard';
 import Auth from './auth/auth'
-import animationStyle from '../lib/animate.css'
+import {actions} from '../reducers'
+import './index.css'
+
 const {clear_msg, user_auth} = actions;
 
 class AppIndex extends Component {
@@ -50,26 +42,23 @@ class AppIndex extends Component {
 
         return (
             <Router>
-                <div>
-                    <Switch>
-						<Route path='/login' component={Auth} />
-                        <Route path='/' component={Dashboard} />
-                        <Route component={NotFound}/>
-                    </Switch>
-                    {isFetching && <Loading/>}
-                    {this.props.notification && this.props.notification.content ?
-                        (this.props.notification.type === 1 ?
-                            this.openNotification('success', this.props.notification.content) :
-                            this.openNotification('error', this.props.notification.content)) :
-                        null}
-                </div>
+              <div>
+			    <Switch>
+				  <Route path='/login' component={Auth} />
+				  <Route path='/' component={Dashboard} />
+				  <Route component={NotFound} />
+				</Switch>
+				{isFetching && <Loading/>}
+				{this.props.notification && this.props.notification.content ?
+					(this.props.notification.type === 1 ?
+						this.openNotification('success', this.props.notification.content) :
+						this.openNotification('error', this.props.notification.content)) :
+					null}
+              </div>
             </Router> 
         )
     }
-
-
 }
-
 
 function mapStateToProps(state) {
     return {
@@ -85,7 +74,6 @@ function mapDispatchToProps(dispatch) {
         user_auth: bindActionCreators(user_auth, dispatch)
     }
 }
-
 
 export default connect(
     mapStateToProps,

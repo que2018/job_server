@@ -1,45 +1,33 @@
 import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
-import {
-    Switch,
-    Route,
-    Redirect,
-} from 'react-router-dom'
-import AdminMenu from "../../components/adminMenu/AdminMenu";
-import Detail from "../detail/Detail";
-import AdminIndex from "../adminIndex/AdminIndex"
-import NotFound from "../../components/notFound/NotFound"; 
-import style from './style.css'
 import {bindActionCreators} from 'redux'
-import {actions} from '../../reducers/admin'
+import {connect} from 'react-redux'
+import {Switch, Route, Redirect} from 'react-router-dom'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import Post from "../post/list/Post";
-import PostAdd from "../post/add/PostAdd";
-import PostEdit from "../post/edit/PostEdit";
-import Customer from "../customer/list/Customer";
-import CustomerAdd from "../customer/add/CustomerAdd";
-import CustomerEdit from "../customer/edit/CustomerEdit";
-import AdminLogin from "../adminLogin/AdminLogin";
-import AdminManagerUser from "../adminManagerUser/AdminManagerUser";
-import AdminNewUserGroup from "../AdminNewUserGroup/AdminNewUserGroup";
-import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
-import {Loading} from "../components/loading/Loading"
 
-import listCategory from "../category/list/category"
-import addCategory from "../category/add/CategoryAdd"
-import editCategory from "../category/edit/CategoryEdit"
-
+import DashboardMenu from '../../components/dashboard_menu/DashboardMenu';
+import NotFound from '../../components/notFound/NotFound'; 
+import Home from '../home/Home'
+import Post from "../post/post";
+import Category from '../category/category';
+import Customer from '../customer/Customer';
+import AdminManagerUser from '../adminManagerUser/AdminManagerUser';
+import AdminNewUserGroup from '../AdminNewUserGroup/AdminNewUserGroup';
+import AdminManagerUserGroup from '../AdminManagerUserGroup/AdminManagerUserGroup';
+import {Loading} from '../components/loading/Loading'
+import {actions} from '../../reducers/admin'
+import style from './style.css'
 
 const {change_location_admin} = actions;
 
 class Dashboard extends Component {
+	
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
 
     render() {
-        const {url} = this.props.match;		
+        const {url} = this.props.match;
 		
 		return (
 			<div>
@@ -47,24 +35,17 @@ class Dashboard extends Component {
 				   this.props.userInfo.userType === 'admin' ?
 						<div className={style.container}>
 							<div className={style.menuContainer}>
-								<AdminMenu history={this.props.history}
-										   url={this.props.adminUrl}
-										   changeUrl={this.props.change_location_admin}/>
+								<DashboardMenu history={this.props.history}
+									url={this.props.adminUrl}
+									changeUrl={this.props.change_location_admin}/>
 							</div>
-						 
 							<div className={style.contentContainer}>
 								<Switch>
-									<Route exact path={url} component={AdminIndex}/>
-									<Route path='/post' component={Post}/>
-									
-									<Route path={`${url}/category`} component={listCategory}/>
-							
-									<Route path={`${url}/customer`} component={Customer}/>
-								
-									<Route path={`${url}/managerUser`} component={AdminManagerUser}/>
-									<Route path={`${url}/newUserGroup`} component={AdminNewUserGroup}/>
-									<Route path={`${url}/managerUserGroup`} component={AdminManagerUserGroup}/>
-									<Route component={NotFound}/>
+									<Route exact path={url} component={Home} />
+									<Route path='/post' component={Post} />
+									<Route path='/category' component={Category} />
+									<Route path='/customer' component={Customer} />
+									<Route component={NotFound} />
 								</Switch>
 							</div>           
 									   

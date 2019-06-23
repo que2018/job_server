@@ -60,14 +60,9 @@ class PostEdit extends Component {
         postData.category = this.props.category;
         postData._category_id = this.props._category_id
         this.props.updatePost(postData);
-        // console.log(postData)
     };
 
     render() {
-        // console.log(this.props.title)
-        // console.log(target.length == 0 ? undefined : target[0]._id)
-        // console.log(this.props._category_id)
-        // console.log(this.props.category)
         return (
             <div>
                 <h2>编辑发布</h2>
@@ -107,21 +102,20 @@ class PostEdit extends Component {
                         type='text'
                         value={this.props.viewCount}
                         onChange={this.viewCountOnChange.bind(this)} />
-
-                   <div style = {{marginTop :'10px'}}>
-                     <Select                
-                             placeholder="请选择分类"
-                            //  defaultValue =
-                          
-                             labelInValue 
-                             value = {{ key:this.props.category}}
-                             style={{ width: 120 }}
-                             onChange={this.categoryOnchange.bind(this)}>
-                             { this.props.categories.map( (item) => 
-                                <Option key = {item._id}>{item.Name}</Option>
-                             )}                       
-                     </Select>
-                     </div>
+                    <div style = {{marginTop :'10px'}}>
+					<span className={style.subTitle}>阅读量</span>
+                    <Select   
+						className={style.titleInput}					
+						placeholder="请选择分类"                          
+						labelInValue 
+						value = {{ key:this.props.category}}
+						style={{ width: 120 }}
+						onChange={this.categoryOnchange.bind(this)}>
+						{ this.props.categories.map( (item) => 
+						<Option key = {item._id}>{item.Name}</Option>
+						)}                       
+                    </Select>
+                    </div>
 
                         
                     <div className={style.bottomContainer}>

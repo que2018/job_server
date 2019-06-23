@@ -1,56 +1,42 @@
-import React,{Component,PropTypes} from 'react'
+import React,{Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {Detail} from '../detail'
-import {Home} from '../home'
-import style from './style.css'
-import {
-    Switch,
-    Route,
-	Redirect
-} from 'react-router-dom'
-import Banner from "../components/banner/Banner";
-import Menus from "../components/menu/Menus";
-import NotFound from "../../components/notFound/NotFound";
+import {Switch, Route, Redirect} from 'react-router-dom'
 import {bindActionCreators} from 'redux'
-import {actions as FrontActinos} from '../../reducers/frontReducer'
-import Login from "../home/components/login/Login";
-import {Logined} from "../home/components/logined/Logined";
-import {actions as IndexActions} from '../../reducers/index'
 
-class Auth extends Component{
+import Login from './components/login/Login';
+import Logined from './components/logined/Logined';
+import NotFound from '../../components/notFound/NotFound';
+import {actions as IndexActions} from '../../reducers/index'
+import style from './style.css'
+
+class Auth extends Component {
     constructor(props){
         super(props);
     }
 
-    render(){
+    render() {
         const {url} = this.props.match;
         const {login, register} = this.props;
+		
         return(
             <div>
-                {/* <div>
-                    <Banner/>
-                </div> */}
-                <div className={style.container}>
-                    <div className={style.contentContainer}>
-                        <div className={style.content}>
-                            <Switch>
-                                <Route exact path={url} />
-                                <Route path={`/detail/:id`} component={Detail}/>
-                                <Route component={NotFound}/>
-                            </Switch>
-                        </div>
-                        <div className={`${style.loginContainer}`}>
-                            {this.props.userInfo.userId ?
-                                <Redirect to='/'/> :
-                                <Login login={login} register={register}/>}
-                        </div>
-                    </div>
-                </div>
+			  <div className={style.container}>
+				<div className={style.contentContainer}>
+				  <div className={style.content}>
+					<Switch>
+					  <Route exact path={url} />
+					  <Route component={NotFound} />
+					</Switch>
+				  </div>
+				  <div className={`${style.loginContainer}`}>
+					{this.props.userInfo.userId ?
+					  <Redirect to='/'/> :
+					  <Login login={login} register={register}/>}
+				  </div>
+				</div>
+			  </div>
             </div>
         )
-    }
-
-    componentDidMount() {
     }
 }
 
@@ -68,12 +54,14 @@ function mapStateToProps(state) {
         userInfo: state.globalState.userInfo
     }
 }
+
 function mapDispatchToProps(dispatch) {
     return{
         login: bindActionCreators(IndexActions.get_login, dispatch),
         register: bindActionCreators(IndexActions.get_register, dispatch)
     }
 }
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

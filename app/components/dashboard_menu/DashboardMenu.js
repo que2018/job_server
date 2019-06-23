@@ -9,7 +9,8 @@ const menus = [
     {url: '/managerUser', name: '用户管理', iconType: 'user-add'},
 	{url: '/managerUserGroup', name: '用户组管理', iconType: 'usergroup-add'},
 ];
-export default class AdminMenu extends Component {
+
+export default class DashboardMenu extends Component {
     constructor(props) {
         super(props)
     }
@@ -23,7 +24,7 @@ export default class AdminMenu extends Component {
                     theme="dark"
                     onClick={({key}) => {
                         this.props.changeUrl(key);
-                        this.props.history.push(`/admin${key}`)
+                        this.props.history.push(`${key}`)
                     }}
                 >
                     {
@@ -38,5 +39,4 @@ export default class AdminMenu extends Component {
             </div>
         )
     }
-
 }

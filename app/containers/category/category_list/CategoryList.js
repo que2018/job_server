@@ -8,7 +8,7 @@ import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
 import {Button} from 'antd'
 
-import {PostCell} from './component/postCell';
+import {CategoryCell} from './component/CategoryCell';
 import style from './style.css'
 
 const {get_categories, delete_category, get_category} = actions;
@@ -50,8 +50,7 @@ class Category extends Component {
 			key: 'action',
 			width: 500,
 			render: (text, record) => (	
-				<PostCell
-					// getPost={(id)=>this.props.getPost(record._id)}		
+				<CategoryCell
 					delete = {() => {
 						console.log(record)
 						this.props.delete_category(record._id , record.ImageUrl); 
@@ -78,11 +77,8 @@ class Category extends Component {
     componentDidMount() {
         if(this.props.category.length === 0)
             this.props.get_categories();
-        // console.log(this.props)
     }
 }
-
-
 
 function mapStateToProps(state) {
     return{

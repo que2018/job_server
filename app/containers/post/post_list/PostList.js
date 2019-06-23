@@ -13,11 +13,13 @@ import style from './style.css'
 
 const {get_posts, get_post, delete_post} = actions;
 
-class Post extends Component {
+class PostList extends Component {
 
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
+		
+		console.log("coming to post list .... ");
     }
 
     render() {
@@ -70,7 +72,7 @@ class Post extends Component {
             <div>
 			  <Row className={style.titleRow}>
 			    <Col span={12}><h2>发布管理</h2></Col>
-			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/post_add')}}/></Col>
+			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/post/add')}}/></Col>
 			  </Row>
 			  <Table columns={columns} dataSource={this.props.postList} />
             </div>
@@ -83,13 +85,13 @@ class Post extends Component {
     }
 }
 
-Post.propsTypes = {
+PostList.propsTypes = {
     pageNUm: PropTypes.number.isRequired,
     postList: PropTypes.arrayOf(PropTypes.object),
     total:PropTypes.number.isRequired
 };
 
-Post.defaultProps = {
+PostList.defaultProps = {
     pageNum: 1,
     postList: [],
     total: 0
@@ -116,5 +118,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Post)
+)(PostList)
 

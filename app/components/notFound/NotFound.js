@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import NotFoundImg from './404.png'
 import pageStyle from './style.css'
 import style from '../../lib/animate.css'
+
 export default class NotFound extends Component{
     constructor(props){
         super(props);

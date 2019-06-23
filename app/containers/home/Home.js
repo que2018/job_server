@@ -1,81 +1,46 @@
 import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import {
-    Redirect
-} from 'react-router-dom'
-import style from './style.css'
-import ArticleList from "./components/articelList/ArticleList";
-import {Pagination} from 'antd';
 import {connect} from 'react-redux'
+import {actions} from '../../reducers/index'
 import {bindActionCreators} from 'redux'
-import {actions as frontActions} from '../../reducers/frontReducer'
-const {get_article_list,get_article_detail} = frontActions;
+
+const {user_auth} = actions;
 
 class Home extends Component {
+	
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     }
 
     render() {
-        const {tags} = this.props;
-        localStorage.setItem('userInfo', JSON.stringify(this.props.userInfo));
-        return (
-          
-                <div className={style.container}>
-                    <ArticleList
-                        history={this.props.history}
-                        data={this.props.articleList}
-                        getArticleDetail={this.props.get_article_detail}
-                    />
-                    <div className={style.paginationContainer}>
-                        <Pagination
-                            defaultPageSize={5}
-                            onChange={(pageNum) => {
-                                this.props.get_article_list(this.props.match.params.tag || '', pageNum);
-                            }}
-                            current={this.props.pageNum}
-                            total={this.props.total}/>
-                    </div>
-                </div>
+        return(
+            <div>
+                <h1 >找工必胜客后台</h1>
+            </div>
         )
-    }
-
-    componentDidMount() {
-        this.props.get_article_list(this.props.match.params.tag || '')
     }
 }
 
 Home.defaultProps = {
-    userInfo: {},
-    pageNum: 1,
-    total: 0,
-    articleList: []
-};
-
-Home.propsTypes = {
-    pageNum: PropTypes.number.isRequired,
-    total: PropTypes.number.isRequired,
-    articleList: PropTypes.array.isRequired
+    isAdmin:false
 };
 
 function mapStateToProps(state) {
     return {
-        tags: state.admin.tags,
-        pageNum: state.front.pageNum,
-        total: state.front.total,
-        articleList: state.front.articleList
+        isAdmin: state.globalState.userInfo.userType === 'admin',
+        userInfo:state.globalState.userInfo
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        get_article_list: bindActionCreators(get_article_list, dispatch),
-        get_article_detail:bindActionCreators(get_article_detail,dispatch)
+        user_auth:bindActionCreators(user_auth,dispatch)
     }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Home);
+)(Home)
+
