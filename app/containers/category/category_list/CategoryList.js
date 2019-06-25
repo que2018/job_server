@@ -19,11 +19,10 @@ class Category extends Component {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
         this.state={
-            categories: ['其他',],
+            categories: []
         }
     }
     
-
     render() {
 		const columns = [{
 			title:'名称',
@@ -31,7 +30,6 @@ class Category extends Component {
 			key:'Name',
 			width: 1000
 		}, 
-
 		{
 			title:'图标',
 			dataIndex:'ImageUrl',
@@ -39,12 +37,9 @@ class Category extends Component {
 			width: 1000,
 			alien: 'center',
 			render: (record) => (	
-				// console.log(record)
-				<img src = {'https://s3-us-west-1.amazonaws.com/job-upload-imge/' + record} height="45" width="45" />
+				<img src = {record} height='40' width='40' />
 			)
-
 		}, 
-
 		{
 			title: '操作',
 			key: 'action',
@@ -81,8 +76,8 @@ class Category extends Component {
 }
 
 function mapStateToProps(state) {
-    return{
-           category:state.admin.category
+    return {
+        category:state.admin.category
     }
 }
 

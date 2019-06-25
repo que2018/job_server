@@ -1,11 +1,11 @@
 import {put, take, call, select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as ManagerCategorysTypes} from '../reducers/category/manageCategory'
+import {actionTypes as ManagerCategoriesTypes} from '../reducers/category/manageCategory'
 import {actionTypes as EditCategory} from '../reducers/category/categroyEdit'
 import { CollapsePanel } from 'antd/lib/collapse/Collapse';
 
-export function* getAllCategorys() {
+export function* getAllCategories() {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
         return yield call(get, '/admin/category/get_categories');
@@ -40,17 +40,17 @@ export function* delCategory(_id, ImageUrl) {
     }
 }
 
-export function* getAllCategorysFlow() {
+export function* getAllCategoriesFlow() {
     while (true) {
-        yield take(ManagerCategorysTypes.GET_CATEGORYS);
-        let res = yield call(getAllCategorys);
+        yield take(ManagerCategoriesTypes.GET_Categories);
+        let res = yield call(getAllCategories);
         if (res.code === 0) {
             // console.log(res.data.list[0].Name)
             let tempArr = [];
             for (let i = 0; i < res.data.list.length; i++) {
                 tempArr.push(res.data.list[i])
             }
-            yield put({type: ManagerCategorysTypes.SET_CATEGORYS, data: tempArr});
+            yield put({type: ManagerCategoriesTypes.SET_Categories, data: tempArr});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             setTimeout(function () {
@@ -64,12 +64,12 @@ export function* getAllCategorysFlow() {
 
 export function* delCategoryFlow() {
     while (true){
-        let req = yield take(ManagerCategorysTypes.DELETE_CATEGORY);
+        let req = yield take(ManagerCategoriesTypes.DELETE_CATEGORY);
         console.log(req)
         let res = yield call(delCategory,req.id, req.ImageUrl);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-            yield put({type:ManagerCategorysTypes.GET_CATEGORYS});
+            yield put({type:ManagerCategoriesTypes.GET_Categories});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
             setTimeout(function () {
@@ -83,7 +83,7 @@ export function* delCategoryFlow() {
 
 export function* addCategoryFlow(){
     while (true) {
-        let req = yield take(ManagerCategorysTypes.ADD_CATEGORY);
+        let req = yield take(ManagerCategoriesTypes.ADD_CATEGORY);
         // console.log(req)
         if (req.name === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入分类名称', msgType: 0});
@@ -92,7 +92,7 @@ export function* addCategoryFlow(){
             console.log(res) 
             if (res.code === 0) {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-                yield put({type:ManagerCategorysTypes.GET_CATEGORYS});
+                yield put({type:ManagerCategoriesTypes.GET_Categories});
                 setTimeout(function () {
                     location.replace('/admin/category');
                 }, 1000);
@@ -121,7 +121,7 @@ export function* getCategory(_id) {
 
 export function* getCategoryFlow() {
     while (true){
-        let req = yield take(ManagerCategorysTypes.GET_CATEGORY);
+        let req = yield take(ManagerCategoriesTypes.GET_CATEGORY);
         console.log(req)
         let res = yield call(getCategory, req.id);
         console.log(res)
@@ -148,7 +148,7 @@ export function* uploadCategoryImage(formData){
 
 // export function* uploadCategoryImageFlow(){
 //     while (true) {
-//         let req = yield take(ManagerCategorysTypes.UPLOAD_CATEGORY_IMAGE);
+//         let req = yield take(ManagerCategoriesTypes.UPLOAD_CATEGORY_IMAGE);
         
 //     }
 // }

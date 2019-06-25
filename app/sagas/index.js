@@ -4,7 +4,7 @@ import {get_all_users_flow} from './adminManagerUsersSaga'
 import {get_all_user_groups_flow, editUserGroupFlow} from './adminManagerUserGroupSaga'
 import {getPostListFlow, addPostFlow, updatePostFlow, getPostFlow, deletePostFlow} from './PostSaga'
 import {getCustomerListFlow, addCustomerFlow, updateCustomerFlow, getCustomerFlow, deleteCustomerFlow} from './CustomerSaga'
-import {getAllCategorysFlow, addCategoryFlow, delCategoryFlow ,getCategoryFlow} from './ManagerCategory'
+import {getAllCategoriesFlow, addCategoryFlow, delCategoryFlow ,getCategoryFlow} from './ManagerCategory'
 import {saveUserGroupFlow} from './adminManagerNewUserGroupSaga'
 
 export default function* rootSaga() {
@@ -28,7 +28,7 @@ export default function* rootSaga() {
 	yield fork(saveUserGroupFlow);
 	yield fork(editUserGroupFlow);
 	
-	yield fork(getAllCategorysFlow);
+	yield fork(getAllCategoriesFlow);
 	yield fork(addCategoryFlow);
 	yield fork(delCategoryFlow);
 	yield fork(getCategoryFlow)

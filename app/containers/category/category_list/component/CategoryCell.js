@@ -2,7 +2,7 @@ import React from 'react'
 import {Button} from 'antd'
 import style from './style.css'
 
-export const CateoryCell = (props)=>(	
+export const CategoryCell = (props)=>(	
     <div>
       <Button  type='primary' icon='edit' className={style.btnEdit} 
       onClick={()=>{
