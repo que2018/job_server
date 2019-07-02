@@ -5,9 +5,9 @@ import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {posts} from './post/post';
 import {reducer as postAdd} from "./post/postAdd";
 import {reducer as postEdit} from "./post/postEdit";
-import {customer_add} from './customer/customer_add';
-import {customer_edit} from './customer/customer_edit';
-import {customer_list} from './customer/customer_list';
+import {reducer as customer_add} from './customer/customer_add';
+import {reducer as customer_edit} from './customer/customer_edit';
+import {reducer as customer_list} from './customer/customer_list';
 import {reducer as category} from "./category/manageCategory"
 import {reducer as categoryEdit} from "./category/categroyEdit"
 

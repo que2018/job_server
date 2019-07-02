@@ -33,7 +33,7 @@ export const actions = {
     }
 };
 
-export function customers(state = initialState, action) {
+export function reducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.RESPONSE_GET_CUSTOMERS:
             return {

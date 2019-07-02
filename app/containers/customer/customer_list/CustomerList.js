@@ -2,17 +2,17 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/customer/customer_list'
 import {Table, Pagination} from 'antd';
-import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
 import {Button} from 'antd'
-import {CustomerCell} from './component/customerCell';
+
+import {CustomerCell} from './component/customerCell'
+import {actions} from '../../../reducers/customer/customer_list'
 import style from './style.css'
 
-const {get_customers, get_customer, delete_customer} = actions;
+const {get_customers, get_customer, delete_customer} = actions
 
-class Customer extends Component {
+class CustomerList extends Component {
 
     constructor(props) {
         super(props);
@@ -48,7 +48,7 @@ class Customer extends Component {
         return (	
             <div>
 			  <Row className={style.titleRow}>
-			    <Col span={12}><h2>发布管理</h2></Col>
+			    <Col span={12}><h2>客户管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/customer_add')}}/></Col>
 			  </Row>
 			  <Table columns={columns} dataSource={this.props.customerList} />
@@ -62,20 +62,20 @@ class Customer extends Component {
     }
 }
 
-Customer.propsTypes = {
+CustomerList.propsTypes = {
     pageNUm: PropTypes.number.isRequired,
     customerList: PropTypes.arrayOf(PropTypes.object),
     total:PropTypes.number.isRequired
 };
 
-Customer.defaultProps = {
+CustomerList.defaultProps = {
     pageNum: 1,
     customerList: [],
     total: 0
 };
 
 function mapStateToProps(state) {
-    let {pageNum, customerList, total} = state.admin.customer.customer_list;
+    let {pageNum, customerList, total} = state.admin.customer_list;
 	
     return {
         pageNum,
@@ -95,5 +95,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Customer)
+)(CustomerList)
 
