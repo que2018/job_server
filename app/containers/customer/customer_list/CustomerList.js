@@ -49,7 +49,7 @@ class CustomerList extends Component {
             <div>
 			  <Row className={style.titleRow}>
 			    <Col span={12}><h2>客户管理</h2></Col>
-			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/customer_add')}}/></Col>
+			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/customer/add')}}/></Col>
 			  </Row>
 			  <Table columns={columns} dataSource={this.props.customerList} />
             </div>
