@@ -18,8 +18,6 @@ class PostList extends Component {
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
-		
-		console.log("coming to post list .... ");
     }
 
     render() {

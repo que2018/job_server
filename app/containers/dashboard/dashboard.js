@@ -4,17 +4,18 @@ import {connect} from 'react-redux'
 import {Switch, Route, Redirect} from 'react-router-dom'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 
-import DashboardMenu from '../../components/dashboard_menu/DashboardMenu';
-import NotFound from '../../components/notFound/NotFound'; 
+import DashboardMenu from '../../components/dashboard_menu/DashboardMenu'
+import NotFound from '../../components/notFound/NotFound'
 import Home from '../home/Home'
-import Post from "../post/post";
-import Category from '../category/category';
-import Customer from '../customer/Customer';
-import AdminManagerUser from '../adminManagerUser/AdminManagerUser';
-import AdminNewUserGroup from '../AdminNewUserGroup/AdminNewUserGroup';
-import AdminManagerUserGroup from '../AdminManagerUserGroup/AdminManagerUserGroup';
+import Post from "../post/post"
+import Category from '../category/category'
+import Customer from '../customer/customer'
+import User from '../user/user'
+import UserGroup from '../user_group/UserGroup'
+
 import {Loading} from '../components/loading/Loading'
 import {actions} from '../../reducers/admin'
+
 import style from './style.css'
 
 const {change_location_admin} = actions;
@@ -45,6 +46,8 @@ class Dashboard extends Component {
 									<Route path='/post' component={Post} />
 									<Route path='/category' component={Category} />
 									<Route path='/customer' component={Customer} />
+									<Route path='/user' component={User} />
+									<Route path='/user_group' component={UserGroup} />
 									<Route component={NotFound} />
 								</Switch>
 							</div>           

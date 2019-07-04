@@ -6,8 +6,8 @@ const menus = [
 	{url: '/post', name: '发布管理', iconType: 'appstore'},
 	{url: '/category', name: '分类管理', iconType: 'tags'},
 	{url: '/customer', name: '客户管理', iconType: 'file-text'},
-    {url: '/managerUser', name: '用户管理', iconType: 'user-add'},
-	{url: '/managerUserGroup', name: '用户组管理', iconType: 'usergroup-add'},
+    {url: '/user', name: '用户管理', iconType: 'user-add'},
+	{url: '/user_group', name: '用户组管理', iconType: 'usergroup-add'},
 ];
 
 export default class DashboardMenu extends Component {
