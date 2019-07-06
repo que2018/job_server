@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/adminManagerUser'
-import {Table, Row, Col, Pagination} from 'antd';
+import {actions} from '../../../reducers/user/user_list'
+import {Table, Row, Col} from 'antd';
 import {Button} from 'antd'
 import style from './style.css'
 
@@ -39,30 +39,17 @@ class UserList extends Component {
 		];
 		
         return (
-            <div>
-			  <Row className={style.titleRow}>
-			    <Col span={12}><h2>用户管理</h2></Col>
-			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/user/add')}}/></Col>
-			  </Row>	
-              <Table
-			    className={style.table}
-			    pagination={false}
-			    columns={columns}
-			    dataSource={this.props.list}/>
-			  <div>
-			    <Pagination
-				  onChange={(pageNum)=>{
-					this.props.getAllUsers(pageNum);
-				  }}
-				  current={this.props.pageNum}
-				  total={this.props.total} />
-			  </div>
-            </div>
+		  <div>
+		    <Row className={style.titleRow}>
+			  <Col span={12}><h2>用户管理</h2></Col>
+			  <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/user/add')}}/></Col>
+		    </Row>	
+		    <Table pagination={true} columns={columns} dataSource={this.props.list} />
+		  </div>
         )
     }
 
     componentDidMount() {
-        //缓存
         if(this.props.list.length === 0)
             this.props.getAllUsers();
     }
@@ -82,6 +69,7 @@ UserList.defaultProps = {
 
 function mapStateToProps(state) {
     let {pageNum, list,total} = state.admin.users;
+	
     return {
         pageNum,
         list,

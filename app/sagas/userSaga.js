@@ -1,7 +1,7 @@
 import {put, take, call, select} from 'redux-saga/effects'
 import {get} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as ManagerUserActionTypes} from '../reducers/adminManagerUser'
+import {actionTypes as ManagerUserActionTypes} from '../reducers/user/user_list'
 
 
 export function* fetch_users(pageNum) {

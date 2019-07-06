@@ -1,6 +1,6 @@
 .titleRow {
 	margin-bottom: 20px;
 }
-.table~div{
-    text-align: center;
+.btnAdd {
+	float: right;
 }

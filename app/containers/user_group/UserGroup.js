@@ -2,14 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../reducers/adminManagerUserGroup'
 import {Table, Pagination} from 'antd';
-import style from './style.css'
+import {actions} from '../../reducers/user_group/user_group_list'
 import {ManagerUserGroupCell} from "./components/ManagerUserGroupCell";
+import style from './style.css'
 
 const {get_all_user_groups, edit_user_group} = actions;
 
-class AdminManagerUserGroup extends Component {
+class user_listGroup extends Component {
     constructor(props) {
         super(props);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
@@ -50,13 +50,13 @@ class AdminManagerUserGroup extends Component {
     }
 }
 
-AdminManagerUserGroup.propsTypes = {
+user_listGroup.propsTypes = {
     pageNUm: PropTypes.number.isRequired,
     list: PropTypes.arrayOf(PropTypes.object),
     total:PropTypes.number.isRequired
 };
 
-AdminManagerUserGroup.defaultProps = {
+user_listGroup.defaultProps = {
     pageNum: 1,
     list: [],
     total:0
@@ -81,5 +81,5 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminManagerUserGroup)
+)(user_listGroup)
 
