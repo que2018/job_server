@@ -13,7 +13,7 @@ import Customer from '../customer/customer'
 import User from '../user/user'
 import UserGroup from '../user_group/UserGroup'
 
-import {Loading} from '../components/loading/Loading'
+import {Loading} from '../../components/loading/Loading'
 import {actions} from '../../reducers/admin'
 
 import style from './style.css'

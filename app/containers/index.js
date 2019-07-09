@@ -6,9 +6,10 @@ import {bindActionCreators} from 'redux'
 import {notification} from 'antd';
 
 import NotFound from '../components/notFound/NotFound';
-import {Loading} from './components/loading/Loading'
+import {Loading} from '../components/loading/Loading'
 import Dashboard from './dashboard/dashboard';
 import Auth from './auth/auth'
+
 import {actions} from '../reducers'
 import './index.css'
 
