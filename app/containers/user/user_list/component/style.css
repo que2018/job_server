@@ -1,0 +1,7 @@
+.btnEdit {
+	margin-right: 8px;
+}
+.btnDel, .btnDel:hover {
+	background: #e65a5a;
+	border: #e65a5a;
+}

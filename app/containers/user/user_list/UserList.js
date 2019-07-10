@@ -5,6 +5,8 @@ import {connect} from 'react-redux'
 import {actions} from '../../../reducers/user/user_list'
 import {Table, Row, Col} from 'antd';
 import {Button} from 'antd'
+
+import {UserCell} from './component/UserCell';
 import style from './style.css'
 
 const {get_all_users} = actions;
@@ -21,20 +23,28 @@ class UserList extends Component {
 				title: '姓名',
 				dataIndex: 'username',
 				key: 'name',
-				render: text => <a href="#">{text}</a>,
-			}, {
+				width: 1000,
+				render: text => <a href="#">{text}</a>
+			}, 
+			{
 				title: 'ID',
 				dataIndex: '_id',
 				key: 'ID',
-			}, {
-				title: '密码(加密后)',
-				dataIndex: 'password',
-				key: 'password',
-			}
-			, {
+				width: 1500
+			}, 
+			{
 				title: '身份',
 				dataIndex: 'type',
 				key: 'address',
+				width: 1000
+			},
+			{
+				title: '操作',
+				key: 'action',
+				width: 1000,
+				render: (text, record) => (	
+				<UserCell />
+			)
 			}
 		];
 		
