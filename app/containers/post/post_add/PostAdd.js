@@ -6,18 +6,14 @@ import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
 import {actions} from '../../../reducers/post/postAdd';
-import {actions as actionsOfCategory} from '../../../reducers/category/manageCategory'
+import {actions as actionsOfCategory} from '../../../reducers/category/category_list'
 import dateFormat from 'dateformat'
 import style from './style.css'
 
 const {TextArea} = Input;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, add_post} = actions;
 const {get_categories, delete_category} = actionsOfCategory;
-const  Option = Select.Option;
-
-
-
-
+const Option = Select.Option;
 
 class PostAdd extends Component {
     constructor(props) {

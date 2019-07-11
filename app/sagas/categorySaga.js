@@ -1,8 +1,8 @@
 import {put, take, call, select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as ManagerCategoriesTypes} from '../reducers/category/manageCategory'
-import {actionTypes as EditCategory} from '../reducers/category/categroyEdit'
+import {actionTypes as ManagerCategoriesTypes} from '../reducers/category/category_list'
+import {actionTypes as EditCategory} from '../reducers/category/category_edit'
 import { CollapsePanel } from 'antd/lib/collapse/Collapse';
 
 export function* getAllCategories() {

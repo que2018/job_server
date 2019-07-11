@@ -8,8 +8,9 @@ import {reducer as postEdit} from "./post/postEdit";
 import {reducer as customer_add} from './customer/customer_add';
 import {reducer as customer_edit} from './customer/customer_edit';
 import {reducer as customer_list} from './customer/customer_list';
-import {reducer as category} from "./category/manageCategory"
-import {reducer as categoryEdit} from "./category/categroyEdit"
+import {reducer as category_add} from "./category/category_add"
+import {reducer as category_edit} from "./category/category_edit"
+import {reducer as category_list} from "./category/category_list"
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -50,8 +51,9 @@ const admin = combineReducers({
 	customer_add,
 	customer_edit,
 	customer_list,
-    category,
-    categoryEdit
+    category_add,
+    category_edit,
+	category_list
 });
 
 export default admin

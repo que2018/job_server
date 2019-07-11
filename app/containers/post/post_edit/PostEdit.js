@@ -7,7 +7,7 @@ import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
 import {actions} from '../../../reducers/post/postEdit';
-import {actions as actionsOfCategory} from '../../../reducers/category/manageCategory'
+import {actions as actionsOfCategory} from '../../../reducers/category/category_list'
 import dateFormat from 'dateformat'
 
 const {TextArea} = Input;
