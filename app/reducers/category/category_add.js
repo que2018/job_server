@@ -3,8 +3,8 @@ const initialState = []
 
 export const actionTypes = {
     SET_CATEGORY_DATA:"SET_CATEGORY_DATA",
-    SET_Categories:"RESPONSE_GET_ALL_Categories",
-    GET_Categories: 'GET_Categories',
+    SET_CATEGORIES:"RESPONSE_GET_ALL_Categories",
+    GET_CATEGORIES: 'GET_CATEGORIES',
     EDIT_CATEGORY: "EDIT_CATEGORY",
     DELETE_CATEGORY: "DELETE_CATEGORY",
     GET_CATEGORY: "GET_CATEGORY",
@@ -15,7 +15,7 @@ export const actionTypes = {
 export const actions = {
     get_categories: function (pageNum = 1) {
         return {
-            type: actionTypes.GET_Categories,
+            type: actionTypes.GET_CATEGORIES,
             pageNum
         }
     },
@@ -63,7 +63,7 @@ export function reducer(state=initialState,action) {
         // return{
         //     ...state,data:action.data
         // };	
-        case actionTypes.SET_Categories:
+        case actionTypes.SET_CATEGORIES:
             return [...action.data];
         default:
             return state;

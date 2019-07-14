@@ -1,13 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+import React,{Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {Table, Row, Col, Pagination} from 'antd';
+import {Button, Divider, Tag} from 'antd';
 import {actions} from '../../../reducers/category/category_list'
-import {Table, Pagination} from 'antd';
-import {Divider, Tag} from 'antd';
-import {Row, Col} from 'antd';
-import {Button} from 'antd'
-
 import {CategoryCell} from './component/CategoryCell';
 import style from './style.css'
 
@@ -37,7 +34,7 @@ class Category extends Component {
 			width: 1000,
 			alien: 'center',
 			render: (record) => (	
-				<img src = {record} height='40' width='40' />
+		      <img src={record} height='40' width='40' />
 			)
 		}, 
 		{
@@ -47,13 +44,12 @@ class Category extends Component {
 			render: (text, record) => (	
 				<CategoryCell
 					delete = {() => {
-						console.log(record)
 						this.props.delete_category(record._id , record.ImageUrl); 
-						}}	
+					}}	
 					getCategory = {() => {
 						this.props.get_category(record._id)
 					}}			
-					history= {this.props.history}
+					history = {this.props.history}
 					data={record} />
 			)
 		}];
@@ -62,22 +58,22 @@ class Category extends Component {
             <div>
 			  <Row className={style.titleRow}>
 			    <Col span={12}><h2>分类管理</h2></Col>
-			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/category_add')}}/></Col>
+			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/category/add')}}/></Col>
 			  </Row>
-			  <Table pagination = {true} columns={columns} dataSource={this.props.category} />
+			  <Table pagination = {true} columns={columns} dataSource={this.props.category_list} />
             </div>
         )
     }
 
     componentDidMount() {
-        if(this.props.category.length === 0)
+        if(this.props.category_list.length === 0)
             this.props.get_categories();
     }
 }
 
 function mapStateToProps(state) {
     return {
-        category:state.admin.category
+        category_list:state.admin.category_list
     }
 }
 

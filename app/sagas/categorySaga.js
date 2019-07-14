@@ -1,11 +1,10 @@
 import {put, take, call, select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as ManagerCategoriesTypes} from '../reducers/category/category_list'
-import {actionTypes as EditCategory} from '../reducers/category/category_edit'
-import { CollapsePanel } from 'antd/lib/collapse/Collapse';
+import {actionTypes as CategoryListTypes} from '../reducers/category/category_list'
+import {actionTypes as CategoryEditTypes} from '../reducers/category/category_edit'
 
-export function* getAllCategories() {
+export function* getCategories() {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
         return yield call(get, '/admin/category/get_categories');
@@ -18,7 +17,6 @@ export function* getAllCategories() {
 
 export function* addCategory(Name,url) {
     yield put({type: IndexActionTypes.FETCH_START});
-    // console.log('from add category' + Name)
 		
     try {
         return yield call(post, '/admin/category/add_category', {name:Name},{url});
@@ -42,15 +40,14 @@ export function* delCategory(_id, ImageUrl) {
 
 export function* getAllCategoriesFlow() {
     while (true) {
-        yield take(ManagerCategoriesTypes.GET_Categories);
-        let res = yield call(getAllCategories);
+        yield take(CategoryListTypes.GET_CATEGORIES);
+        let res = yield call(getCategories);
         if (res.code === 0) {
-            // console.log(res.data.list[0].Name)
             let tempArr = [];
             for (let i = 0; i < res.data.list.length; i++) {
                 tempArr.push(res.data.list[i])
             }
-            yield put({type: ManagerCategoriesTypes.SET_Categories, data: tempArr});
+            yield put({type: CategoryListTypes.SET_CATEGORIES, data: tempArr});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             setTimeout(function () {
@@ -64,12 +61,12 @@ export function* getAllCategoriesFlow() {
 
 export function* delCategoryFlow() {
     while (true){
-        let req = yield take(ManagerCategoriesTypes.DELETE_CATEGORY);
+        let req = yield take(CategoryListTypes.DELETE_CATEGORY);
         console.log(req)
         let res = yield call(delCategory,req.id, req.ImageUrl);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-            yield put({type:ManagerCategoriesTypes.GET_Categories});
+            yield put({type:CategoryListTypes.GET_CATEGORIES});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
             setTimeout(function () {
@@ -83,8 +80,8 @@ export function* delCategoryFlow() {
 
 export function* addCategoryFlow(){
     while (true) {
-        let req = yield take(ManagerCategoriesTypes.ADD_CATEGORY);
-        // console.log(req)
+        let req = yield take(CategoryListTypes.ADD_CATEGORY);
+		
         if (req.name === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入分类名称', msgType: 0});
         } else {
@@ -92,9 +89,9 @@ export function* addCategoryFlow(){
             console.log(res) 
             if (res.code === 0) {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-                yield put({type:ManagerCategoriesTypes.GET_Categories});
+                yield put({type:CategoryListTypes.GET_CATEGORIES});
                 setTimeout(function () {
-                    location.replace('/admin/category');
+                    location.replace('/category/list');
                 }, 1000);
             }else if (res.message === '身份信息已过期，请重新登录') {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
@@ -121,12 +118,11 @@ export function* getCategory(_id) {
 
 export function* getCategoryFlow() {
     while (true){
-        let req = yield take(ManagerCategoriesTypes.GET_CATEGORY);
-        console.log(req)
+        let req = yield take(CategoryListTypes.GET_CATEGORY);
         let res = yield call(getCategory, req.id);
-        console.log(res)
+		
         if(res){
-            yield put({type:EditCategory.SET_CATEGORY_DATA, 
+            yield put({type:CategoryEditTypes.SET_CATEGORY_DATA, 
                        id:res.data._id,
                        name:res.data.Name,
                        url:res.data.ImageUrl,
@@ -145,12 +141,5 @@ export function* uploadCategoryImage(formData){
         yield put({type: IndexActionTypes.FETCH_END})
     }
 }
-
-// export function* uploadCategoryImageFlow(){
-//     while (true) {
-//         let req = yield take(ManagerCategoriesTypes.UPLOAD_CATEGORY_IMAGE);
-        
-//     }
-// }
 
 

@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Upload, Input, Select, Button, Modal, Icon, message, Form} from 'antd';
-import {actions} from '../../../reducers/category/manageCategory';
+import {actions} from '../../../reducers/category/category_add';
 import dateFormat from 'dateformat'
 import style from './style.css'
 import reqwest from 'reqwest'

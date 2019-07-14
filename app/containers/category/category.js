@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
-
-import CategoryEdit from "./category_edit/CategoryEdit"
-import CategoryList from "./category_list/CategoryList"
+import CategoryAdd from './category_add/CategoryAdd'
+import CategoryEdit from './category_edit/CategoryEdit'
+import CategoryList from './category_list/CategoryList'
 
 export default class Category extends Component {
 
@@ -15,8 +15,9 @@ export default class Category extends Component {
 		
         return (
 			<Switch>
-				<Route exact path={url} component={CategoryList} />
-				<Route path='/category/edit' component={CategoryEdit} />
+		      <Route exact path={url} component={CategoryList} />
+			  <Route path='/category/add' component={CategoryAdd} />
+			  <Route path='/category/edit' component={CategoryEdit} />
 			</Switch>
         )
     }

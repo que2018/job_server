@@ -1,10 +1,9 @@
 const initialState = []
 
-
 export const actionTypes = {
     SET_CATEGORY_DATA:"SET_CATEGORY_DATA",
-    SET_Categories:"RESPONSE_GET_ALL_Categories",
-    GET_Categories: 'GET_Categories',
+    SET_CATEGORIES:"RESPONSE_GET_ALL_Categories",
+    GET_CATEGORIES: 'GET_CATEGORIES',
     EDIT_CATEGORY: "EDIT_CATEGORY",
     DELETE_CATEGORY: "DELETE_CATEGORY",
     GET_CATEGORY: "GET_CATEGORY",
@@ -13,34 +12,34 @@ export const actionTypes = {
 };
 
 export const actions = {
-    get_categories: function (pageNum = 1) {
+    get_categories: function(pageNum = 1) {
         return {
-            type: actionTypes.GET_Categories,
+            type: actionTypes.GET_CATEGORIES,
             pageNum
         }
     },
-    delete_category: function (id,ImageUrl) {
+    delete_category: function(id,ImageUrl) {
         return {
             type: actionTypes.DELETE_CATEGORY,
             id,
             ImageUrl
         }
     },
-    edit_category: function (name) {
+    edit_category: function(name) {
         return {
             type: actionTypes.EDIT_CATEGORY,
             name
         }
     },
 
-    get_category:function (id) {		
+    get_category:function(id) {		
         return{
             type: actionTypes.GET_CATEGORY,
             id,
         }
     },
 
-    add_category:function (name , url) {		
+    add_category:function(name , url) {		
         return{
             type: actionTypes.ADD_CATEGORY,
             name,
@@ -48,7 +47,7 @@ export const actions = {
         }
     },
     
-    upload_category_image:function (name ,file) {		
+    upload_category_image:function(name, file) {		
         return{
             type: actionTypes.UPLOAD_CATEGORY_IMAGE,
             name,
@@ -59,11 +58,7 @@ export const actions = {
 
 export function reducer(state=initialState,action) {
     switch (action.type){
-        // case actionTypes.SET_CATEGORY_DATA:
-        // return{
-        //     ...state,data:action.data
-        // };	
-        case actionTypes.SET_Categories:
+        case actionTypes.SET_CATEGORIES:
             return [...action.data];
         default:
             return state;

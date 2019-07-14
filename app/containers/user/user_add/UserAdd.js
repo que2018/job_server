@@ -4,9 +4,9 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
-import {Input, Select, Button, Modal} from 'antd';
-import {actions} from "../../../reducers/adminManagerNewUserGroup";
 import dateFormat from 'dateformat'
+import {Input, Select, Button, Modal} from 'antd';
+import {actions} from "../../../reducers/user/user_list"
 import style from './style.css'
 
 const {update_name, update_description, save_user_group} = actions;

@@ -1,7 +1,6 @@
 import {combineReducers} from 'redux'
 import {users} from './user/user_list'
 import {user_groups} from './user_group/user_group_list'
-import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {posts} from './post/post';
 import {reducer as postAdd} from "./post/postAdd";
 import {reducer as postEdit} from "./post/postEdit";
@@ -44,7 +43,6 @@ const admin = combineReducers({
     adminGlobalState:reducer,
     users,
 	user_groups,
-	newUserGroup,
 	posts,
 	postAdd,
 	postEdit,
