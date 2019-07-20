@@ -4,14 +4,14 @@ const initialState = {
 };
 
 export const actionTypes = {
-    UPDATING_NAME:'UPDATING_NAME',
+    UPDATE_NAME:'UPDATE_NAME',
 	ADD_USER:'ADD_USER'
 };
 
 export const actions = {
     update_name:function (name) {
         return{
-            type:actionTypes.UPDATING_NAME,
+            type:actionTypes.UPDATE_NAME,
             name
         }
     },
@@ -25,7 +25,7 @@ export const actions = {
 
 export function reducer(state = initialState, action) {
     switch (action.type){
-        case actionTypes.UPDATING_NAME:
+        case actionTypes.UPDATE_NAME:
             return{
                 ...state,title:action.name
             };

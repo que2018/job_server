@@ -8,7 +8,7 @@ import {Input, Select, Button, Modal} from 'antd';
 import {actions} from '../../../reducers/user/user_add'
 import style from './style.css'
 
-const {update_name} = actions;
+const {update_name, add_user} = actions;
 
 class UserAdd extends Component {
     constructor(props) {
@@ -17,8 +17,14 @@ class UserAdd extends Component {
     }
 
     nameOnChange(e) {
-        this.props.update_name(e.target.value);
+        this.props.updateName(e.target.value);
     }
+	
+	addUser() {
+        let userData = {};
+        userData.name = this.props.name;
+        this.props.addUser(userData);
+    };
 
     render() {
         return (
@@ -33,7 +39,7 @@ class UserAdd extends Component {
 					value={this.props.name}
 					onChange={this.nameOnChange.bind(this)} />
 				<div className={style.bottomContainer}>
-			      <Button type="primary" className={style.buttonStyle}>保存</Button>
+			      <Button type='primary' onClick={this.addUser.bind(this)} className={style.buttonStyle}>保存</Button>
 				</div>
 			  </div>
             </div>
@@ -59,7 +65,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        update_name: bindActionCreators(update_name, dispatch)
+        updateName: bindActionCreators(update_name, dispatch),
+		addUser: bindActionCreators(add_user, dispatch)
     }
 }
 
