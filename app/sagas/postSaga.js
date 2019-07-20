@@ -1,9 +1,9 @@
 import {take,call,put,select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as PostTypes} from '../reducers/post/post'
-import {actionTypes as PostAddTypes} from '../reducers/post/postAdd'
-import {actionTypes as PostEditypes} from '../reducers/post/postEdit'
+import {actionTypes as PostAddTypes} from '../reducers/post/post_add'
+import {actionTypes as PostEditypes} from '../reducers/post/post_edit'
+import {actionTypes as PostListTyes} from '../reducers/post/post_list'
 
 export function* getPostList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
@@ -19,12 +19,12 @@ export function* getPostList(pageNum) {
 
 export function* getPostListFlow() {
     while (true){
-        let req = yield take(PostTypes.GET_POSTS);
+        let req = yield take(PostListTyes.GET_POSTS);
         let res = yield call(getPostList,req.pageNum);
         if(res){
             if (res.code === 0) {
                 res.data.pageNum = req.pageNum;
-                yield put({type:PostTypes.RESPONSE_GET_POSTS,data:res.data})
+                yield put({type:PostListTyes.RESPONSE_GET_POSTS,data:res.data})
             } else if (res.message === '身份信息已过期，请重新登录') {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
                 setTimeout(function () {
@@ -72,7 +72,7 @@ export function* addPostFlow() {
                 if (res.code === 0) {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
                     setTimeout(function () {
-                        location.replace('/admin/post');
+                        location.replace('/post');
                     }, 1000);
                 } else if (res.message === '身份信息已过期，请重新登录') {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
@@ -117,7 +117,7 @@ export function* updatePostFlow() {
                 if (res.code === 0) {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
                     setTimeout(function () {
-                        location.replace('/admin/post');
+                        location.replace('/post');
                     }, 1000);
                 } else if (res.message === '身份信息已过期，请重新登录') {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
@@ -134,7 +134,7 @@ export function* updatePostFlow() {
 
 export function* getPostFlow() {
     while (true){
-        let req = yield take(PostTypes.GET_POST);
+        let req = yield take(PostListTyes.GET_POST);
         let res = yield call(getPost, req.id);
         if(res){
 			let id = res.data._id;
@@ -171,7 +171,7 @@ export function* getPost(id) {
 
 export function* deletePostFlow() {
     while (true){
-        let req = yield take(PostTypes.DELETE_POST);
+        let req = yield take(PostListTyes.DELETE_POST);
 		const pageNum = yield select(state => state.admin.posts.pageNum);
 
         let res = yield call(deletePost,req.id);
@@ -179,7 +179,7 @@ export function* deletePostFlow() {
         if(res){
             if (res.code === 0) {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '删除成功!', msgType: 1});
-                yield put({type: PostTypes.GET_POSTS, pageNum})
+                yield put({type: PostListTyes.GET_POSTS, pageNum})
             } else if (res.message === '身份信息已过期，请重新登录') {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
                 setTimeout(function () {

@@ -54,7 +54,7 @@ class UserList extends Component {
 			  <Col span={12}><h2>用户管理</h2></Col>
 			  <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/user/add')}}/></Col>
 		    </Row>	
-		    <Table pagination={true} columns={columns} dataSource={this.props.list} />
+		    <Table rowKey="username" pagination={true} columns={columns} dataSource={this.props.list} />
 		  </div>
         )
     }

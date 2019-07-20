@@ -24,13 +24,13 @@ class Category extends Component {
 		const columns = [{
 			title:'名称',
 			dataIndex:'Name',
-			key:'Name',
+			key:'name',
 			width: 1000
 		}, 
 		{
 			title:'图标',
 			dataIndex:'ImageUrl',
-			key:'ImageUrl',
+			key:'image_url',
 			width: 1000,
 			alien: 'center',
 			render: (record) => (	
@@ -60,7 +60,7 @@ class Category extends Component {
 			    <Col span={12}><h2>分类管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/category/add')}}/></Col>
 			  </Row>
-			  <Table pagination = {true} columns={columns} dataSource={this.props.category_list} />
+			  <Table rowKey="Name" pagination = {true} columns={columns} dataSource={this.props.category_list} />
             </div>
         )
     }

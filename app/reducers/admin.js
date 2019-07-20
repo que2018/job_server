@@ -2,15 +2,15 @@ import {combineReducers} from 'redux'
 import {reducer as user_add} from './user/user_add'
 import {users} from './user/user_list'
 import {user_groups} from './user_group/user_group_list'
-import {posts} from './post/post';
-import {reducer as postAdd} from "./post/postAdd";
-import {reducer as postEdit} from "./post/postEdit";
-import {reducer as customer_add} from './customer/customer_add';
-import {reducer as customer_edit} from './customer/customer_edit';
-import {reducer as customer_list} from './customer/customer_list';
-import {reducer as category_add} from "./category/category_add"
-import {reducer as category_edit} from "./category/category_edit"
-import {reducer as category_list} from "./category/category_list"
+import {reducer as post_add} from './post/post_add';
+import {reducer as post_edit} from './post/post_edit';
+import {reducer as post_list} from './post/post_list';
+import {reducer as customer_add} from './customer/customer_add'
+import {reducer as customer_edit} from './customer/customer_edit'
+import {reducer as customer_list} from './customer/customer_list'
+import {reducer as category_add} from './category/category_add'
+import {reducer as category_edit} from './category/category_edit'
+import {reducer as category_list} from './category/category_list'
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -45,9 +45,9 @@ const admin = combineReducers({
 	user_add,
     users,
 	user_groups,
-	posts,
-	postAdd,
-	postEdit,
+	post_add,
+	post_edit,
+	post_list,
 	customer_add,
 	customer_edit,
 	customer_list,

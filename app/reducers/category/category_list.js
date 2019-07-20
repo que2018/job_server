@@ -1,3 +1,4 @@
+
 const initialState = []
 
 export const actionTypes = {
@@ -39,7 +40,7 @@ export const actions = {
         }
     },
 
-    add_category:function(name , url) {		
+    add_category:function(name, url) {		
         return{
             type: actionTypes.ADD_CATEGORY,
             name,

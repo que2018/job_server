@@ -2,12 +2,9 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/post/post'
-import {Table, Pagination} from 'antd';
-import {Divider, Tag} from 'antd';
-import {Row, Col} from 'antd';
-import {Button} from 'antd'
-
+import {actions} from '../../../reducers/post/post_list'
+import {Table, Row, Col, Pagination} from 'antd';
+import {Divider, Tag, Button} from 'antd';
 import {PostCell} from './component/postCell';
 import style from './style.css'
 
@@ -52,7 +49,6 @@ class PostList extends Component {
 			key:'category',
 			width: 100
 		},  
-
 		{
 			title: '操作',
 			key: 'action',
@@ -72,7 +68,7 @@ class PostList extends Component {
 			    <Col span={12}><h2>发布管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/post/add')}}/></Col>
 			  </Row>
-			  <Table columns={columns} dataSource={this.props.postList} />
+			  <Table rowKey="title" columns={columns} dataSource={this.props.postList} />
             </div>
         )
     }
@@ -96,7 +92,7 @@ PostList.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    let {pageNum, postList, total} = state.admin.posts;
+    let {pageNum, postList, total} = state.admin.post_list;
 	
     return {
         pageNum,

@@ -6,15 +6,13 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/post/postEdit';
-import {actions as actionsOfCategory} from '../../../reducers/category/category_list'
-import dateFormat from 'dateformat'
+import {actions} from '../../../reducers/post/post_edit';
+import {actions as action_category_list} from '../../../reducers/category/category_list'
 
 const {TextArea} = Input;
+const Option = Select.Option;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post , update_category_id} = actions;
-const {get_categories, delete_category} = actionsOfCategory;
-const  Option = Select.Option;
-
+const {get_categories} = action_category_list;
 
 class PostEdit extends Component {
     constructor(props) {
@@ -48,7 +46,6 @@ class PostEdit extends Component {
        this.props.update_category_id(value.key)
     }
 
-
     updatePost() {
        let postData = {};
 	    postData.id = this.props.id;
@@ -65,70 +62,67 @@ class PostEdit extends Component {
     render() {
         return (
             <div>
-                <h2>编辑发布</h2>
-                <div className={style.container}>
-                    <span className={style.subTitle}>标题</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入标题'}
-                        type='text'
-                        value={this.props.title}
-                        onChange={this.titleOnChange.bind(this)} />
-					<span className={style.subTitle}>作者</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入作者'}
-                        type='text'
-                        value={this.props.author}
-                        onChange={this.authorOnChange.bind(this)} />
-					<span className={style.subTitle}>内容</span>
-					<TextArea
-                        className={style.titleInput}
-                        placeholder={'请输入内容'}
-                        rows={6}
-                        value={this.props.description}
-                        onChange={this.descriptionOnChange.bind(this)} />							
-					<span className={style.subTitle}>添加日期</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入添加日期'}
-                        type='text'
-                        value={this.props.dateAdded}
-                        onChange={this.dateAddedOnChange.bind(this)} />
-					<span className={style.subTitle}>阅读量</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入阅读量'}
-                        type='text'
-                        value={this.props.viewCount}
-                        onChange={this.viewCountOnChange.bind(this)} />
-                    <div style = {{marginTop :'10px'}}>
-					<span className={style.subTitle}>阅读量</span>
-                    <Select   
-						className={style.titleInput}					
-						placeholder="请选择分类"                          
-						labelInValue 
-						value = {{ key:this.props.category}}
-						style={{ width: 120 }}
-						onChange={this.categoryOnchange.bind(this)}>
-						{ this.props.categories.map( (item) => 
-						<Option key = {item._id}>{item.Name}</Option>
-						)}                       
-                    </Select>
-                    </div>
-
-                        
-                    <div className={style.bottomContainer}>
-                        <Button type='primary' onClick={this.updatePost.bind(this)} className={style.buttonStyle}>保存</Button>
-                    </div>
-                </div>
-            </div>
+			  <h2>编辑发布</h2>
+			  <div className={style.container}>
+				<span className={style.subTitle}>标题</span>
+				<Input
+					className={style.titleInput}
+					placeholder={'请输入标题'}
+					type='text'
+					value={this.props.title}
+					onChange={this.titleOnChange.bind(this)} />
+				<span className={style.subTitle}>作者</span>
+				<Input
+					className={style.titleInput}
+					placeholder={'请输入作者'}
+					type='text'
+					value={this.props.author}
+					onChange={this.authorOnChange.bind(this)} />
+				<span className={style.subTitle}>内容</span>
+				<TextArea
+					className={style.titleInput}
+					placeholder={'请输入内容'}
+					rows={6}
+					value={this.props.description}
+					onChange={this.descriptionOnChange.bind(this)} />							
+				<span className={style.subTitle}>添加日期</span>
+				<Input
+					className={style.titleInput}
+					placeholder={'请输入添加日期'}
+					type='text'
+					value={this.props.dateAdded}
+					onChange={this.dateAddedOnChange.bind(this)} />
+				<span className={style.subTitle}>阅读量</span>
+				<Input
+					className={style.titleInput}
+					placeholder={'请输入阅读量'}
+					type='text'
+					value={this.props.viewCount}
+					onChange={this.viewCountOnChange.bind(this)} />
+				<div style = {{marginTop :'10px'}}>
+				<span className={style.subTitle}>阅读量</span>
+				<Select   
+					className={style.titleInput}					
+					placeholder="请选择分类"                          
+					labelInValue 
+					value = {{ key:this.props.category}}
+					onChange={this.categoryOnchange.bind(this)}>
+					{ this.props.categories.map( (item) => 
+					<Option key = {item._id}>{item.Name}</Option>
+					)}                       
+				</Select>
+			  </div>	
+			  <div className={style.bottomContainer}>
+			    <Button type='primary' onClick={this.updatePost.bind(this)} className={style.buttonStyle}>保存</Button>
+			  </div>
+			</div>
+          </div>
         ) 
     }
 
     componentDidMount() {      
         this.props.get_categories(); 
-       }
+    }
 }
 
 PostEdit.propsTypes = {
@@ -139,7 +133,7 @@ PostEdit.propsTypes = {
 	dateAdded: PropTypes.date,
     viewCount: PropTypes.number,
     category:PropTypes.string,
-    _category_id:PropTypes.string,
+    _category_id:PropTypes.string
 };
 
 PostEdit.defaultProps = {
@@ -154,7 +148,7 @@ PostEdit.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    const {id, title, author, description, dateAdded, viewCount, category, _category_id} = state.admin.postEdit;
+    const {id, title, author, description, dateAdded, viewCount, category, _category_id} = state.admin.post_edit;
     
     return {
 		id,
@@ -165,7 +159,7 @@ function mapStateToProps(state) {
         category,
         viewCount,
         _category_id,
-        categories : state.admin.category
+        categories : state.admin.category_list
     }
 }
 
@@ -179,7 +173,7 @@ function mapDispatchToProps(dispatch) {
         updateCategory: bindActionCreators(update_category, dispatch),
         updatePost: bindActionCreators(update_post, dispatch),
         update_category_id : bindActionCreators(update_category_id, dispatch),
-        get_categories: bindActionCreators(get_categories, dispatch),
+        get_categories: bindActionCreators(get_categories, dispatch)
     }
 }
 
