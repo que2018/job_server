@@ -6,6 +6,7 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
+import {DatePicker} from 'antd';
 import {actions} from '../../../reducers/post/post_edit';
 import {actions as action_category_list} from '../../../reducers/category/category_list'
 
@@ -70,7 +71,7 @@ class PostEdit extends Component {
 					placeholder={'请输入标题'}
 					type='text'
 					value={this.props.title}
-					onChange={this.titleOnChange.bind(this)} />
+					onChange={this.titleOnChange.bind(this)} />	
 				<span className={style.subTitle}>作者</span>
 				<Input
 					className={style.titleInput}
@@ -86,6 +87,7 @@ class PostEdit extends Component {
 					value={this.props.description}
 					onChange={this.descriptionOnChange.bind(this)} />							
 				<span className={style.subTitle}>添加日期</span>
+				<DatePicker className={style.titleInput} />
 				<Input
 					className={style.titleInput}
 					placeholder={'请输入添加日期'}
