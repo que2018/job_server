@@ -10,6 +10,10 @@ import {DatePicker} from 'antd';
 import {actions} from '../../../reducers/post/post_edit';
 import {actions as action_category_list} from '../../../reducers/category/category_list'
 
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
+
 const {TextArea} = Input;
 const Option = Select.Option;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, update_post , update_category_id} = actions;
@@ -18,6 +22,7 @@ const {get_categories} = action_category_list;
 class PostEdit extends Component {
     constructor(props) {
         super(props);
+		
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     }
 
@@ -34,7 +39,18 @@ class PostEdit extends Component {
     };
 	
 	dateAddedOnChange(e) {
-        this.props.updateDateAdded(e.target.value)
+		let d = new Date(e._d);
+		
+        var month = '' + (d.getMonth() + 1);
+        var day = '' + d.getDate();
+        var year = d.getFullYear();
+
+		if(month.length < 2) month = '0' + month;
+		if(day.length < 2) day = '0' + day;
+
+		let dateFormate = year + "-" + month + "-" + day;
+
+        this.props.updateDateAdded(dateFormate)
     };
 	
 	viewCountOnChange(e) {
@@ -60,7 +76,7 @@ class PostEdit extends Component {
         this.props.updatePost(postData);
     };
 
-    render() {
+    render() {		
         return (
             <div>
 			  <h2>编辑发布</h2>
@@ -87,13 +103,11 @@ class PostEdit extends Component {
 					value={this.props.description}
 					onChange={this.descriptionOnChange.bind(this)} />							
 				<span className={style.subTitle}>添加日期</span>
-				<DatePicker className={style.titleInput} />
-				<Input
+				<DatePicker 
 					className={style.titleInput}
-					placeholder={'请输入添加日期'}
-					type='text'
-					value={this.props.dateAdded}
-					onChange={this.dateAddedOnChange.bind(this)} />
+					defaultValue={moment(this.props.dateAdded, 'YYYY-MM-DD')}
+					onChange={this.dateAddedOnChange.bind(this)}
+				/>
 				<span className={style.subTitle}>阅读量</span>
 				<Input
 					className={style.titleInput}
@@ -122,7 +136,7 @@ class PostEdit extends Component {
         ) 
     }
 
-    componentDidMount() {      
+    componentDidMount() { 
         this.props.get_categories(); 
     }
 }
