@@ -5,9 +5,10 @@ import {connect} from 'react-redux'
 import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
-import {Input, Select, Button, Modal} from 'antd';
+import {Input, Select, Button, Modal, Tabs} from 'antd';
 import {actions} from '../../../reducers/customer/customer_edit';
 import dateFormat from 'dateformat'
+const { TabPane } = Tabs;
 
 const {edit_name, edit_description, update_customer} = actions;
 
@@ -37,26 +38,33 @@ class CustomerEdit extends Component {
     render() {
         return (
             <div>
-                <h2>编辑客户</h2>
-                <div className={style.container}>
-                    <span className={style.subTitle}>名字</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入名字'}
-                        type='text'
-                        value={this.props.name}
-                        onChange={this.nameOnChange.bind(this)} />
-					<span className={style.subTitle}>描述</span>
-                    <Input
-                        className={style.titleInput}
-                        placeholder={'请输入描述'}
-                        type='text'
-                        value={this.props.description}
-                        onChange={this.descriptionOnChange.bind(this)} />
-                    <div className={style.bottomContainer}>
-                        <Button type='primary' onClick={this.updateCustomer.bind(this)} className={style.buttonStyle}>保存</Button>
-                    </div>
-                </div>
+			  <h2>编辑客户</h2>
+			  <Tabs defaultActiveKey="1">
+				<TabPane tab="通用" key="1">
+				  <div className={style.container}>
+				    <span className={style.subTitle}>名字</span>
+				    <Input
+					  className={style.titleInput}
+					  placeholder={'请输入名字'}
+					  type='text'
+					  value={this.props.name}
+					  onChange={this.nameOnChange.bind(this)} />
+				    <span className={style.subTitle}>描述</span>
+					<Input
+					  className={style.titleInput}
+					  placeholder={'请输入描述'}
+					  type='text'
+					  value={this.props.description}
+					  onChange={this.descriptionOnChange.bind(this)} />
+					<div className={style.bottomContainer}>
+					  <Button type='primary' onClick={this.updateCustomer.bind(this)} className={style.buttonStyle}>保存</Button>
+					</div>
+				  </div>
+				</TabPane>
+				<TabPane tab="统计" key="2">
+				  Content of Tab Pane 2
+				</TabPane>
+			  </Tabs>
             </div>
         ) 
     }
