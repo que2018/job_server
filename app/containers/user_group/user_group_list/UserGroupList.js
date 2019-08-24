@@ -37,7 +37,7 @@ class UserListGroup extends Component {
 					 <UserGroupCell
 						edit_user_group={(id)=>this.props.edit_user_group(id)}
 						history={this.props.history}
-						getUserGroupDetail={(id)=>this.props.get_user_group_detail(id)}
+						get_user_group={(id)=>this.props.get_user_group(id)}
 						delete={(id)=>this.props.delete_user_group(id)}
 						key={index} 
 						data={item}
