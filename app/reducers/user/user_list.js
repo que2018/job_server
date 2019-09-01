@@ -17,7 +17,7 @@ export const actions = {
     }
 };
 
-export function users(state = initialState, action) {  
+export function reducer(state = initialState, action) {  
     switch (action.type) {
         case actionTypes.RESOLVE_GET_ALL_USERS:
             return {
@@ -27,6 +27,5 @@ export function users(state = initialState, action) {
             };
         default:
             return state;
-
     }
 }

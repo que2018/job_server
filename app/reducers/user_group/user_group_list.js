@@ -24,7 +24,7 @@ export const actions = {
     }
 };
 
-export function user_groups(state = initialState, action) {
+export function reducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.RESOLVE_GET_ALL_USER_GROUPS:
             return {

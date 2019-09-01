@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
-
-import UserAdd from "./user_add/UserAdd"
-import UserList from "./user_list/UserList"
+import UserAdd from './user_add/UserAdd'
+import UserList from './user_list/UserList'
 
 export default class User extends Component {
 

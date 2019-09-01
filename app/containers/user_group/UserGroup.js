@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Switch, Route} from 'react-router-dom'
-import UserGroupList from "./user_group_list/UserGroupList"
+import UserGroupAdd from './user_group_add/UserGroupAdd'
+import UserGroupList from './user_group_list/UserGroupList'
 
 export default class UserGroup extends Component {
 
@@ -14,6 +15,7 @@ export default class UserGroup extends Component {
         return (
 		  <Switch>
 		    <Route exact path={url} component={UserGroupList} />
+			<Route path='/user_group/add' component={UserGroupAdd} />
 		  </Switch>
         )
     }

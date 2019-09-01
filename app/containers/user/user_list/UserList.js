@@ -78,7 +78,7 @@ UserList.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    let {pageNum, list,total} = state.admin.users;
+    let {pageNum, list,total} = state.admin.user_list;
 	
     return {
         pageNum,

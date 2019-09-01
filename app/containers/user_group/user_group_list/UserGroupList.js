@@ -59,7 +59,7 @@ UserListGroup.defaultProps = {
 };
 
 function mapStateToProps(state) {
-    let {pageNum, list, total} = state.admin.user_groups;
+    let {pageNum, list, total} = state.admin.user_group_list;
     return {
         pageNum,
         list,

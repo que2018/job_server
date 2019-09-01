@@ -1,7 +1,4 @@
 import {combineReducers} from 'redux'
-import {reducer as user_add} from './user/user_add'
-import {users} from './user/user_list'
-import {user_groups} from './user_group/user_group_list'
 import {reducer as post_add} from './post/post_add';
 import {reducer as post_edit} from './post/post_edit';
 import {reducer as post_list} from './post/post_list';
@@ -11,6 +8,10 @@ import {reducer as customer_list} from './customer/customer_list'
 import {reducer as category_add} from './category/category_add'
 import {reducer as category_edit} from './category/category_edit'
 import {reducer as category_list} from './category/category_list'
+import {reducer as user_add} from './user/user_add'
+import {reducer as user_list} from './user/user_list'
+import {reducer as user_group_add} from './user_group/user_group_add'
+import {reducer as user_group_list} from './user_group/user_group_list'
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -42,9 +43,6 @@ export function reducer(state=initialState,action) {
 
 const admin = combineReducers({
     adminGlobalState:reducer,
-	user_add,
-    users,
-	user_groups,
 	post_add,
 	post_edit,
 	post_list,
@@ -53,7 +51,11 @@ const admin = combineReducers({
 	customer_list,
     category_add,
     category_edit,
-	category_list
+	category_list,
+	user_add,
+    user_list,
+	user_group_add,
+	user_group_list
 });
 
 export default admin
