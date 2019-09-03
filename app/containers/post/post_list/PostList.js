@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {actions} from '../../../reducers/post/post_list'
 import {Table, Row, Col, Pagination} from 'antd';
-import {Divider, Tag, Button} from 'antd';
+import {Divider, Tag, Button, Breadcrumb} from 'antd';
 import {PostCell} from './component/postCell';
 import style from './style.css'
 
@@ -62,13 +62,20 @@ class PostList extends Component {
 			)
 		}];
 
-        return (	
+        return (
             <div>
-			  <Row className={style.titleRow}>
-			    <Col span={12}><h2>发布管理</h2></Col>
-			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/post/add')}}/></Col>
+			  <Row className={style.header}>
+			    <Col span={12}>
+				  <h2>发布管理</h2>
+				  <Breadcrumb className={style.breadcrumb}>
+				    <Breadcrumb.Item onClick={()=>{this.props.history.push('/')}}>首页</Breadcrumb.Item>
+			        <Breadcrumb.Item>发布管理</Breadcrumb.Item>
+			        <Breadcrumb.Item>发布列表</Breadcrumb.Item>
+		          </Breadcrumb>
+				</Col>
+			    <Col span={12}><Button type='primary' icon='plus' className={style.btnAdd} onClick={()=>{this.props.history.push('/post/add')}}/></Col>
 			  </Row>
-			  <Table rowKey="title" columns={columns} dataSource={this.props.postList} />
+			  <Table rowKey='title' columns={columns} dataSource={this.props.postList} />
             </div>
         )
     }

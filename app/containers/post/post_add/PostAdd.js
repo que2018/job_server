@@ -2,14 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import remark from 'remark'
-import reactRenderer from 'remark-react'
-import dateFormat from 'dateformat'
-import {Input, Select, Button, Modal} from 'antd';
+import {Table, Row, Col, Input, Button, Breadcrumb, Select} from 'antd';
 import {actions} from '../../../reducers/post/post_add';
 import {actions as action_category_list} from '../../../reducers/category/category_list'
 import style from './style.css'
-
 const {TextArea} = Input;
 const {update_title, update_author, update_description, update_date_added, update_view_count, update_category, add_post} = actions;
 const {get_categories} = action_category_list;
@@ -65,60 +61,69 @@ class PostAdd extends Component {
     render() {
         return (
 		  <div>
-			<h2>新增发布</h2>
-			  <div className={style.container}>
-			    <span className={style.subTitle}>标题</span>
-				<Input
-					className={style.titleInput}
-					placeholder={'请输入标题'}
-					type='text'
-					value={this.props.title}
-					onChange={this.titleOnChange.bind(this)} />
-				<span className={style.subTitle}>作者</span>
-				<Input
-					className={style.titleInput}
-					placeholder={'请输入作者'}
-					type='text'
-					value={this.props.author}
-					onChange={this.authorOnChange.bind(this)} />
-				<span className={style.subTitle}>内容</span>
-				<TextArea
-					className={style.titleInput}
-					placeholder={'请输入内容'}
-					rows={6}
-					value={this.props.description}
-					onChange={this.descriptionOnChange.bind(this)} />	
-				<span className={style.subTitle}>添加日期</span>
-				<Input
-					className={style.titleInput}
-					placeholder={'请输入添加日期'}
-					type='text'
-					value={this.props.dateAdded}
-					onChange={this.dateAddedOnChange.bind(this)} />
-				<span className={style.subTitle}>阅读量</span>
-				<Input
-					className={style.titleInput}
-					placeholder={'请输入阅读量'}
-					type='text'
-					value={this.props.viewCount}
-					onChange={this.viewCountOnChange.bind(this)} />
-			    <span className={style.subTitle}>分类</span>
-			    <div style = {{marginTop :'10'}}>
-			    <Select 
-					className={style.titleInput}
-					placeholder="请选择分类"
-					labelInValue 
-					onChange={this.categoryOnchange.bind(this)}>
-					{this.props.categories.map((item) => 
-					  <Option key = {item._id}>{item.Name}</Option>        
-					)}
-				</Select>
-			  </div>
-			  <div className={style.bottomContainer}>
-				<Button type='primary' onClick={this.addPost.bind(this)}className={style.buttonStyle}>添加</Button>
-			  </div>
-			</div>
+			<Row className={style.header}>
+			  <Col span={12}>
+			    <h2>新增发布</h2>
+			    <Breadcrumb className={style.breadcrumb}>
+				  <Breadcrumb.Item onClick={()=>{this.props.history.push('/')}}>首页</Breadcrumb.Item>
+				  <Breadcrumb.Item onClick={()=>{this.props.history.push('/post')}}>发布管理</Breadcrumb.Item>
+				  <Breadcrumb.Item>新增发布</Breadcrumb.Item>
+			    </Breadcrumb>
+			  </Col>
+			</Row>
+		    <div className={style.container}>
+			  <span className={style.subTitle}>标题</span>
+			  <Input
+				className={style.titleInput}
+				placeholder={'请输入标题'}
+				type='text'
+				value={this.props.title}
+				onChange={this.titleOnChange.bind(this)} />
+			  <span className={style.subTitle}>作者</span>
+			  <Input
+				className={style.titleInput}
+				placeholder={'请输入作者'}
+				type='text'
+				value={this.props.author}
+				onChange={this.authorOnChange.bind(this)} />
+			  <span className={style.subTitle}>内容</span>
+			  <TextArea
+				className={style.titleInput}
+				placeholder={'请输入内容'}
+				rows={6}
+				value={this.props.description}
+				onChange={this.descriptionOnChange.bind(this)} />	
+			  <span className={style.subTitle}>添加日期</span>
+			  <Input
+				className={style.titleInput}
+				placeholder={'请输入添加日期'}
+				type='text'
+				value={this.props.dateAdded}
+				onChange={this.dateAddedOnChange.bind(this)} />
+			  <span className={style.subTitle}>阅读量</span>
+			  <Input
+				className={style.titleInput}
+				placeholder={'请输入阅读量'}
+				type='text'
+				value={this.props.viewCount}
+				onChange={this.viewCountOnChange.bind(this)} />
+			  <span className={style.subTitle}>分类</span>
+			  <div style = {{marginTop :'10'}}>
+			  <Select 
+				className={style.titleInput}
+				placeholder="请选择分类"
+				labelInValue 
+				onChange={this.categoryOnchange.bind(this)}>
+				{this.props.categories.map((item) => 
+				  <Option key = {item._id}>{item.Name}</Option>        
+				)}
+			  </Select>
+		    </div>
+		    <div className={style.bottomContainer}>
+			  <Button type='primary' onClick={this.addPost.bind(this)}className={style.buttonStyle}>添加</Button>
+		    </div>
 		  </div>
+		</div>
         ) 
     }
 

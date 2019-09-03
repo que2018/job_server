@@ -1,6 +1,11 @@
-.titleRow {
+.header {
 	margin-bottom: 20px;
 }
 .btnAdd {
 	float: right;
+	margin-top: 10px;
+}
+.breadcrumb {
+	margin-top: 5px;
+	cursor: pointer;
 }

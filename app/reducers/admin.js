@@ -9,6 +9,7 @@ import {reducer as category_add} from './category/category_add'
 import {reducer as category_edit} from './category/category_edit'
 import {reducer as category_list} from './category/category_list'
 import {reducer as user_add} from './user/user_add'
+import {reducer as user_edit} from './user/user_edit'
 import {reducer as user_list} from './user/user_list'
 import {reducer as user_group_add} from './user_group/user_group_add'
 import {reducer as user_group_list} from './user_group/user_group_list'
@@ -53,6 +54,7 @@ const admin = combineReducers({
     category_edit,
 	category_list,
 	user_add,
+	user_edit,
     user_list,
 	user_group_add,
 	user_group_list

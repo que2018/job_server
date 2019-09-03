@@ -1,17 +1,32 @@
-.textArea {
+.testCode pre{
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+.testCode ul{
+    margin:auto;
+    padding-left:20px;
+    list-style: disc;
+}
+.textArea{
     border:solid thin #ddd;
     margin:10px 0;
     height: 400px;
     width: 100%;
 }
-.subTitle {
+.subTitle{
     color: #373737;
     font-size: 14px;
 }
+
 .container{
     margin-top: 10px;
 }
-.titleInput {
+.titleInput{
     width: 60%;
     display: block;
     margin:10px 0;
@@ -20,17 +35,19 @@
     width: 70%;
     display: block;
 }
-.bottomContainer {
+.bottomContainer{
     width: 70%;
     display: flex;
     margin-top: 30px;
 }
-.buttonStyle {
+
+
+.buttonStyle{
     margin-right: 30px;
     width: 90px;
     height: 30px;
 }
-.breadcrumb {
-	margin-top: 5px;
-	cursor: pointer;
+.modalContainer{
+    height: 500px;
+    overflow: scroll;
 }
