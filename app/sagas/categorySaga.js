@@ -38,7 +38,7 @@ export function* delCategory(_id, ImageUrl) {
     }
 }
 
-export function* getAllCategoriesFlow() {
+export function* getCategoriesFlow() {
     while (true) {
         yield take(CategoryListTypes.GET_CATEGORIES);
         let res = yield call(getCategories);
