@@ -13,7 +13,7 @@ export function* login(username, password) {
     }
 }
 
-export function* register (data) {
+export function* register(data) {
     yield put({type:IndexActionTypes.FETCH_START});
     try {
         return yield call(post, '/user/register', data)
@@ -35,7 +35,7 @@ export function* loginFlow() {
     }
 }
 
-export function* registerFlow () {
+export function* registerFlow() {
     while(true){
         let request = yield take(IndexActionTypes.USER_REGISTER);
         let response = yield call(register, request.data);
@@ -44,22 +44,5 @@ export function* registerFlow () {
             yield put({type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data})
         }
 
-    }
-}
-
-export function* user_auth () {
-    while(true){
-        yield take(IndexActionTypes.USER_AUTH);
-        try {
-            yield put({type:IndexActionTypes.FETCH_START});
-            let response = yield call(get,'/user/userInfo');
-            if(response && response.code === 0){
-                yield put({type:IndexActionTypes.RESPONSE_USER_INFO,data:response.data})
-            }
-        }catch (err){
-            console.log(err);
-        }finally {
-            yield put({type: IndexActionTypes.FETCH_END});
-        }
     }
 }

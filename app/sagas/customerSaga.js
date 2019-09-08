@@ -55,10 +55,7 @@ export function* addCustomerFlow() {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入名字', msgType: 0});
         } else if (request.data.description === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入描述', msgType: 0});
-        } else {
-			
-			console.log(request.data);
-			
+        } else {			
             let res = yield call(addCustomer, request.data);
             if (res) {
                 if (res.code === 0) {
@@ -79,7 +76,7 @@ export function* addCustomerFlow() {
     }
 }
 
-export function* updateCustomer(data) {
+export function* editCustomer(data) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
         return yield call(post, '/admin/customer/update_customer', data);
@@ -90,7 +87,7 @@ export function* updateCustomer(data) {
     }
 }
 
-export function* updateCustomerFlow() {
+export function* editCustomerFlow() {
     while (true) {
         let request = yield take(CustomerEditypes.UPDATE_CUSTOMER);
         if (request.data.name === '') {
@@ -98,7 +95,7 @@ export function* updateCustomerFlow() {
         } else if (request.data.description === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布作者', msgType: 0});
         } else {
-            let res = yield call(updateCustomer, request.data);
+            let res = yield call(editCustomer, request.data);
             if (res) {
                 if (res.code === 0) {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});

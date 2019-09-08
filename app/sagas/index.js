@@ -1,30 +1,32 @@
 import {fork} from 'redux-saga/effects'
-import {loginFlow, registerFlow, user_auth} from './homeSaga'
-import {get_all_users_flow} from './userSaga'
-import {get_all_user_groups_flow, editUserGroupFlow} from './userGroupSaga'
-import {getPostListFlow, addPostFlow, updatePostFlow, getPostFlow, deletePostFlow} from './PostSaga'
-import {getCustomerListFlow, addCustomerFlow, updateCustomerFlow, getCustomerFlow, deleteCustomerFlow} from './CustomerSaga'
+import {loginFlow, registerFlow} from './authSaga'
+import {getPostListFlow, addPostFlow, editPostFlow, getPostFlow, deletePostFlow} from './PostSaga'
+import {getCustomerListFlow, addCustomerFlow, editCustomerFlow, getCustomerFlow, deleteCustomerFlow} from './CustomerSaga'
 import {getCategoriesFlow, addCategoryFlow, delCategoryFlow ,getCategoryFlow} from './categorySaga'
+import {getUsersFlow} from './userSaga'
+import {getUserGroupsFlow, addUserGroupFlow, editUserGroupFlow} from './userGroupSaga'
 
 export default function* rootSaga() {
 	yield fork(getPostListFlow);
 	yield fork(addPostFlow);
-	yield fork(updatePostFlow);
+	yield fork(editPostFlow);
 	yield fork(getPostFlow);
 	yield fork(deletePostFlow);
 	yield fork(getCustomerListFlow);
 	yield fork(addCustomerFlow);
-	yield fork(updateCustomerFlow);
+	yield fork(editCustomerFlow);
 	yield fork(getCustomerFlow);
 	yield fork(deleteCustomerFlow);
     yield fork(loginFlow);
     yield fork(registerFlow);
-    yield fork(user_auth);
-    yield fork(get_all_users_flow);
-	yield fork(get_all_user_groups_flow);
-	yield fork(editUserGroupFlow);
+    yield fork(getUsersFlow);
+	yield fork(getUserGroupsFlow);
+	yield fork(addUserGroupFlow);
+	//yield fork(editUserGroupFlow);
+	//yield fork(getUserGroupFlow);
+	//yield fork(deleteUserGroupFlow);
 	yield fork(getCategoriesFlow);
 	yield fork(addCategoryFlow);
 	yield fork(delCategoryFlow);
-	yield fork(getCategoryFlow)
+	yield fork(getCategoryFlow);
 }

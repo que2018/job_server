@@ -4,8 +4,9 @@ import {actionsTypes as IndexActionTypes} from '../reducers'
 import {actionTypes as ManagerUserActionTypes} from '../reducers/user/user_list'
 
 
-export function* fetch_users(pageNum) {
+export function* fetchUsers(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
+	
     try {
         return yield call(get, `/admin/getUsers?pageNum=${pageNum}`);
     } catch (err) {
@@ -15,11 +16,12 @@ export function* fetch_users(pageNum) {
     }
 }
 
-export function* get_all_users_flow() {
+export function* getUsersFlow() {
     while (true) {
         let request = yield take(ManagerUserActionTypes.GET_ALL_USER);
+		
         let pageNum = request.pageNum||1;
-        let response = yield call(fetch_users,pageNum);
+        let response = yield call(fetchUsers,pageNum);
         if(response&&response.code === 0){
             for(let i = 0;i<response.data.list.length;i++){
                 response.data.list[i].key = i;

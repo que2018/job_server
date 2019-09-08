@@ -87,7 +87,7 @@ export function* addPostFlow() {
     }
 }
 
-export function* updatePost(data) {
+export function* editPost(data) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
         return yield call(post, '/admin/post/update_post', data);
@@ -98,7 +98,7 @@ export function* updatePost(data) {
     }
 }
 
-export function* updatePostFlow() {
+export function* editPostFlow() {
     while (true) {
         let request = yield take(PostEditypes.UPDATE_POST);
         if (request.data.title === '') {
@@ -112,7 +112,7 @@ export function* updatePostFlow() {
         } else if (request.data.view_count === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布阅读数量', msgType: 0});
         } else {
-            let res = yield call(updatePost, request.data);
+            let res = yield call(editPost, request.data);
             if (res) {
                 if (res.code === 0) {
                     yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
